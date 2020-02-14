@@ -1,12 +1,18 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
+import 'package:byneetcourseapp/src/modules/login/login_service.dart';
 import 'package:byneetcourseapp/src/modules/wishlist/widgets/wishlist_widget.dart';
+import 'package:byneetcourseapp/src/modules/wishlist/wishlist_service.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../loading_container.dart';
 
 class WishlistAndroid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LoginService>(context);
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -38,11 +44,19 @@ class WishlistAndroid extends StatelessWidget {
             )
           ];
         },
-        body: Container(
-          child: WishListWidget(
-            kelas: dummyKelas,
-          ),
-        ),
+        body: FutureBuilder<List<CourseModel>>(
+            future: WishListService(user.user.uid).getDataCollection(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done)
+                return LoadingContainer();
+              if (!snapshot.hasData)
+                return Center(child: Text('something bad happend.'));
+              return Container(
+                child: WishListWidget(
+                  kelas: snapshot.data,
+                ),
+              );
+            }),
       ),
     );
   }
