@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class WishListService with ChangeNotifier {
   final String idUser;
-  var _api;
+  Api _api;
   WishListService(this.idUser) {
     _api = Api('users/$idUser/wishlist');
   }
@@ -18,5 +18,9 @@ class WishListService with ChangeNotifier {
     wishlist =
         res.documents.map((doc) => CourseModel.fromFirestore(doc)).toList();
     return wishlist;
+  }
+
+  Future<void> addWishlist(String id, CourseModel data) async {
+    await _api.setDocument(id, data.toMap());
   }
 }
