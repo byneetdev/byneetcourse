@@ -20,6 +20,7 @@ class ScreenshotWidget extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => PhotoViewAndroid(
+                  index: index,
                   screenshot: screenshotImage,
                 ),
               ),
@@ -31,13 +32,13 @@ class ScreenshotWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Hero(
-              tag: screenshotImage,
+              tag: screenshotImage + index.toString(),
               child: Container(
                 width: 150,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     image: DecorationImage(
-                      image: AssetImage(screenshotImage),
+                      image: NetworkImage(screenshotImage),
                       fit: BoxFit.cover,
                     )),
               ),

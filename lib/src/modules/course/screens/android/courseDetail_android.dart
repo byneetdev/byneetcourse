@@ -1,5 +1,4 @@
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
-import 'package:byneetcourseapp/src/modules/course/models/theory_model.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/screenshot_widget.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/theory_widget.dart';
 import 'package:clay_containers/clay_containers.dart';
@@ -68,7 +67,7 @@ class CourseDetailAndroid extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16),
                                   image: DecorationImage(
-                                      image: AssetImage(kelas.urlimage),
+                                      image: NetworkImage(kelas.urlimage),
                                       fit: BoxFit.cover),
                                 ),
                               ),
@@ -243,11 +242,7 @@ class CourseDetailAndroid extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 15.0),
-                      FutureBuilder<List<Theory>>(
-                          future: null,
-                          builder: (context, snapshot) {
-                            return TheoryWidget(theory: snapshot.data);
-                          }),
+                      TheoryWidget(theory: kelas.theories)
                     ],
                   ),
                 ),

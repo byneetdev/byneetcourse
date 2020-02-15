@@ -82,7 +82,7 @@ class CourseGridAll extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   image: DecorationImage(
-                                    image: AssetImage(kelas.urlimage),
+                                    image: NetworkImage(kelas.urlimage),
                                     fit: BoxFit.cover,
                                   ),
                                 ),

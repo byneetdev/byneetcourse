@@ -3,7 +3,8 @@ import 'package:photo_view/photo_view.dart';
 
 class PhotoViewAndroid extends StatelessWidget {
   final String screenshot;
-  PhotoViewAndroid({@required this.screenshot});
+  final int index;
+  PhotoViewAndroid({@required this.screenshot, this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +12,8 @@ class PhotoViewAndroid extends StatelessWidget {
       appBar: AppBar(),
       body: Container(
         child: Hero(
-            tag: screenshot,
-            child: PhotoView(imageProvider: AssetImage(screenshot))),
+            tag: screenshot + index.toString(),
+            child: PhotoView(imageProvider: NetworkImage(screenshot))),
       ),
     );
   }
