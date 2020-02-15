@@ -1,23 +1,24 @@
 class Theory {
   final String id;
   final String title;
-  final List<MateriModels> materis;
-  Theory({this.title, this.id, this.materis});
+  final List<ItemModel> items;
+  Theory({this.title, this.id, this.items});
 
-  factory Theory.fromFirestore(Map doc) {
+  factory Theory.fromMap(Map doc) {
     return Theory(
-        title: doc["title"],
-        materis: (doc["materis"] as List).map((e) => MateriModels.fromMap(e)));
+      title: doc["title"],
+      items: (doc["items"] as List).map((e) => ItemModel.fromMap(e)).toList(),
+    );
   }
 }
 
-class MateriModels {
+class ItemModel {
   final String title;
   final String idmateri;
 
-  MateriModels({this.title, this.idmateri});
+  ItemModel({this.title, this.idmateri});
 
-  factory MateriModels.fromMap(Map data) {
-    return MateriModels(title: data["title"], idmateri: data['idamateri']);
+  factory ItemModel.fromMap(Map data) {
+    return ItemModel(title: data["title"], idmateri: data['idamateri']);
   }
 }
