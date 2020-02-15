@@ -1,9 +1,10 @@
-import 'package:byneetcourseapp/src/modules/bottomNavBar.dart';
+import 'package:byneetcourseapp/src/modules/login/login_service.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:byneetcourseapp/src/modules/forgotPassword/screens/android/forgotPassword_android.dart';
 import 'package:byneetcourseapp/src/modules/register/screens/android/register_android.dart';
 import 'package:byneetcourseapp/src/modules/login/widgets/textfield_widget.dart';
+import 'package:provider/provider.dart';
 
 class LoginAndroid extends StatefulWidget {
   @override
@@ -39,6 +40,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LoginService>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -60,7 +62,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
                 color: Color(0xFFFB1002),
               ),
             ),
-          )
+          ),
         ],
       ),
       body: Container(
@@ -136,12 +138,13 @@ class _LoginAndroidState extends State<LoginAndroid> {
                     // spread: 1,
                     onPressed: () {
                       if (formKey.currentState.validate()) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BottomNavBar(),
-                          ),
-                        );
+                        // Navigator.pushReplacement(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => BottomNavBar(),
+                        //   ),
+                        // );
+                        user.signIn(emailCtrl.text, passCtrl.text);
                       }
                     },
                     shape: RoundedRectangleBorder(
@@ -166,31 +169,58 @@ class _LoginAndroidState extends State<LoginAndroid> {
                     ),
                   ),
                   SizedBox(height: 16),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ForgotPasswordAndroid(),
-                          ));
-                    },
-                    child: ClayContainer(
-                      borderRadius: 15,
-                      color: Color(0xFFD2E0EF),
-                      curveType: CurveType.none,
-                      // emboss: true,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Lupa Password",
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFFB1002),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ForgotPasswordAndroid(),
+                              ));
+                        },
+                        child: ClayContainer(
+                          borderRadius: 15,
+                          color: Color(0xFFD2E0EF),
+                          curveType: CurveType.none,
+                          // emboss: true,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Lupa Password",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFFB1002),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                      InkWell(
+                        onTap: () {
+                          user.signInWithGoogle();
+                        },
+                        child: ClayContainer(
+                          borderRadius: 15,
+                          color: Color(0xFFD2E0EF),
+                          curveType: CurveType.none,
+                          // emboss: true,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              " Goolge Sign In ",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blueGrey,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 100),
                 ],

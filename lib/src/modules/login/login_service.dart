@@ -19,6 +19,24 @@ class LoginService with ChangeNotifier {
   Status get status => _status;
   FirebaseUser get user => _user;
 
+  Future<bool> register(String email, String password, String nama) async {
+    try {
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        var newInfo = UserUpdateInfo()
+          ..displayName = nama
+          ..photoUrl =
+              "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/98987.png?alt=media&token=8e0bef42-c551-4baa-8696-7de6a720bd43";
+        return value.user.updateProfile(newInfo);
+      });
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
   Future<bool> signIn(String email, String password) async {
     try {
       _status = Status.Authenticating;
