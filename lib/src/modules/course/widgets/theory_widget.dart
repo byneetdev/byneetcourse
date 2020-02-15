@@ -24,7 +24,7 @@ class EntryItem extends StatelessWidget {
   final Theory entry;
 
   Widget _buildTiles(Theory root) {
-    if (root.materis.isEmpty) return ListTile(title: Text(root.title));
+    if (root.items.isEmpty) return ListTile(title: Text(root.title));
     return Padding(
       padding: const EdgeInsets.only(
         right: 8.0,
@@ -44,7 +44,7 @@ class EntryItem extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          children: root.materis.map((e) {
+          children: root.items.map((e) {
             return ListTile(
               leading: Icon(Icons.lock),
               title: Text(e.title),
