@@ -1,4 +1,4 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:byneetcourseapp/src/modules/course/screens/android/courseDetail_android.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class HorizontalListWidget extends StatelessWidget {
   final String listTitle;
-  final List<Kelas> kelasData;
+  final List<CourseModel> kelasData;
   final Function onPressed;
   // final Stri
   HorizontalListWidget(
@@ -67,7 +67,7 @@ class HorizontalListWidget extends StatelessWidget {
 }
 
 class FutureItemList extends StatelessWidget {
-  final List<Kelas> kelasData;
+  final List<CourseModel> kelasData;
   FutureItemList({this.kelasData});
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class FutureItemList extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         image: DecorationImage(
-                          image: AssetImage(kelas.urlimage),
+                          image: NetworkImage(kelas.urlimage),
                           fit: BoxFit.cover,
                         ),
                       ),

@@ -1,9 +1,8 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
 import 'package:byneetcourseapp/src/modules/course/screens/android/photoview_android.dart';
 import 'package:flutter/material.dart';
 
 class ScreenshotWidget extends StatelessWidget {
-  final List<Screenshot> screenshot;
+  final List<String> screenshot;
   ScreenshotWidget({@required this.screenshot});
 
   @override
@@ -32,13 +31,13 @@ class ScreenshotWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Hero(
-              tag: screenshotImage.urlimage,
+              tag: screenshotImage,
               child: Container(
                 width: 150,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     image: DecorationImage(
-                      image: AssetImage(screenshotImage.urlimage),
+                      image: AssetImage(screenshotImage),
                       fit: BoxFit.cover,
                     )),
               ),

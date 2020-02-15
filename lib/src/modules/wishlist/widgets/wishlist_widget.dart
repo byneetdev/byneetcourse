@@ -1,10 +1,10 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:byneetcourseapp/src/modules/course/screens/android/courseDetail_android.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 
 class WishListWidget extends StatelessWidget {
-  final List<Kelas> kelas;
+  final List<CourseModel> kelas;
   WishListWidget({@required this.kelas});
 
   @override

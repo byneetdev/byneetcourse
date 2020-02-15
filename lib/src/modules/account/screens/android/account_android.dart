@@ -5,13 +5,14 @@ import 'package:byneetcourseapp/src/modules/loading_screen.dart';
 import 'package:byneetcourseapp/src/modules/login/login_service.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AccountAndroid extends StatelessWidget {
-  final user = LoginService.instance().user;
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LoginService>(context).user;
     return FutureBuilder<AccountModel>(
-        future: AccountService().cekDataUser(user.uid, {
+        future: AccountService().cekDataUser(user.uid, <String, dynamic>{
           "nama": user.displayName,
           "urlImg":
               "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/98987.png?alt=media&token=8e0bef42-c551-4baa-8696-7de6a720bd43"
@@ -50,7 +51,7 @@ class AccountAndroid extends StatelessWidget {
                                     child: CircleAvatar(
                                       backgroundColor: Colors.amber,
                                       backgroundImage:
-                                          AssetImage(snapshot.data.urlImg),
+                                          NetworkImage(snapshot.data.urlImg),
                                     ),
                                   ),
                                 ),

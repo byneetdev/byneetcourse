@@ -1,7 +1,6 @@
 import 'package:byneetcourseapp/src/kutils/api.dart';
+import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:flutter/material.dart';
-
-import 'models/wishlist_model_purin.dart';
 
 class WishListService with ChangeNotifier {
   final String idUser;
@@ -11,35 +10,13 @@ class WishListService with ChangeNotifier {
   }
 
   //tempat simpan data
-  List<WishListModel> wishlist;
-  WishListModel wishDetail;
+  List<CourseModel> wishlist;
 
-  //nambah documnt
-  Future addDocument(Map data) async {
-    await _api.addDocument(data);
-    return;
-  }
-
-  Future<List<WishListModel>> getDataCollection() async {
+  Future<List<CourseModel>> getDataCollection() async {
     var res = await _api.getDataCollection();
+    if (res.documents.length < 1) return null;
     wishlist =
-        res.documents.map((doc) => WishListModel.fromFirestore(doc)).toList();
+        res.documents.map((doc) => CourseModel.fromFirestore(doc)).toList();
     return wishlist;
-  }
-
-  Future<WishListModel> getDocumentById(String id) async {
-    var doc = await _api.getDocumentById(id);
-    wishDetail = WishListModel.fromFirestore(doc);
-    return wishDetail;
-  }
-
-  Future removeDocument(String id) async {
-    await _api.removeDocument(id);
-    return;
-  }
-
-  Future updateDocument(String id, Map data) async {
-    await _api.updateDocument(id, data);
-    return;
   }
 }

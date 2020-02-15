@@ -1,11 +1,12 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
+import 'package:byneetcourseapp/src/modules/course/models/theory_model.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/screenshot_widget.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/theory_widget.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 
 class CourseDetailAndroid extends StatelessWidget {
-  final Kelas kelas;
+  final CourseModel kelas;
   CourseDetailAndroid({@required this.kelas});
 
   @override
@@ -242,7 +243,11 @@ class CourseDetailAndroid extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 15.0),
-                      TheoryWidget(theory: kelas.theory),
+                      FutureBuilder<List<Theory>>(
+                          future: null,
+                          builder: (context, snapshot) {
+                            return TheoryWidget(theory: snapshot.data);
+                          }),
                     ],
                   ),
                 ),

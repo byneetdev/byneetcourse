@@ -4,16 +4,13 @@ import 'package:byneetcourseapp/src/modules/home/home_service.dart';
 import 'package:byneetcourseapp/src/modules/home/models/carousel_model.dart';
 import 'package:byneetcourseapp/src/modules/home/widgets/horizontalListItem_widget.dart';
 import 'package:byneetcourseapp/src/modules/loading_container.dart';
-import 'package:byneetcourseapp/src/modules/login/login_service.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:byneetcourseapp/src/modules/home/widgets/carouselSwiper_widget.dart';
-import 'package:provider/provider.dart';
 
 class HomeAndroid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<LoginService>(context);
     return Scaffold(
       backgroundColor: Color(0xFFD2E0EF),
       body: Container(
@@ -30,7 +27,7 @@ class HomeAndroid extends StatelessWidget {
                   children: <Widget>[
                     //Nama user
                     Text(
-                      user.user.displayName,
+                      "Byneet Courses",
                       style: TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
@@ -48,7 +45,7 @@ class HomeAndroid extends StatelessWidget {
                         child: CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.black12,
-                          backgroundImage: NetworkImage(user.user.photoUrl),
+                          backgroundImage: AssetImage('images/byneet3.PNG'),
                         ),
                       ),
                     ),

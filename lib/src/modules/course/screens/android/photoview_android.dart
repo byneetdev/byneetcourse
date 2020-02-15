@@ -1,9 +1,8 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
 class PhotoViewAndroid extends StatelessWidget {
-  final Screenshot screenshot;
+  final String screenshot;
   PhotoViewAndroid({@required this.screenshot});
 
   @override
@@ -12,8 +11,8 @@ class PhotoViewAndroid extends StatelessWidget {
       appBar: AppBar(),
       body: Container(
         child: Hero(
-            tag: screenshot.urlimage,
-            child: PhotoView(imageProvider: AssetImage(screenshot.urlimage))),
+            tag: screenshot,
+            child: PhotoView(imageProvider: AssetImage(screenshot))),
       ),
     );
   }

@@ -1,10 +1,10 @@
+import 'package:byneetcourseapp/src/modules/home/models/carousel_model.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:byneetcourseapp/dummy/carousel.dart';
 
 class CarouselSwiperWidget extends StatelessWidget {
-  final List<Carousel> itemList;
+  final List<CarouselModel> itemList;
   CarouselSwiperWidget({@required this.itemList});
 
   @override
@@ -32,7 +32,7 @@ class CarouselSwiperWidget extends StatelessWidget {
                   color: Color(0xFFD2E0EF),
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                    image: AssetImage(carouselItem.urlimage),
+                    image: NetworkImage(carouselItem.urlimage),
                     fit: BoxFit.cover,
                   ),
                 ),

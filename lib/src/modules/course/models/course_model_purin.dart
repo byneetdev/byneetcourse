@@ -16,12 +16,14 @@ class CourseModel {
       this.id});
 
   factory CourseModel.fromFirestore(DocumentSnapshot doc) => CourseModel(
-      id: doc.documentID,
-      name: doc.data["name"],
-      urlimage: doc.data["urlimage"],
-      status: doc.data["status"],
-      description: doc.data["description"],
-      screenshot: doc.data["screenshot"]);
+        id: doc.documentID,
+        name: doc.data["name"],
+        urlimage: doc.data["urlimage"],
+        status: doc.data["status"],
+        description: doc.data["description"],
+        screenshot:
+            (doc.data["screenshot"] as List).map((e) => e.toString()).toList(),
+      );
 
   Map<String, dynamic> toMap() {
     return {};
