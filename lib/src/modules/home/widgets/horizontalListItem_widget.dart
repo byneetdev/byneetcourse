@@ -77,7 +77,7 @@ class FutureItemList extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
         //variabel memudahkan untuk get
-        final kelas = kelasData[index];
+        var kelas = kelasData[index];
 
         return InkWell(
           onTap: () {
