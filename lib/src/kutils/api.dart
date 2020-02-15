@@ -38,7 +38,7 @@ class Api {
   }
 
   //buat dokument(set) pakai id/key yg di tentukan
-  Future<DocumentReference> setDocument(String id, Map data) {
+  Future<void> setDocument(String id, Map data) {
     return ref.document(id).setData(data);
   }
 
