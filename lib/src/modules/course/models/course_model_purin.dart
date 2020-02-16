@@ -31,6 +31,13 @@ class CourseModel {
           .toList());
 
   Map<String, dynamic> toMap() {
-    return {};
+    return {
+      "name": name,
+      "urlimage": urlimage,
+      "status": status,
+      "description": description,
+      "screenshot": screenshot,
+      "theories": theories.map((e) => e.toMap()).toList()
+    };
   }
 }

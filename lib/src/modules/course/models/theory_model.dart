@@ -10,6 +10,10 @@ class Theory {
       items: (doc["items"] as List).map((e) => ItemModel.fromMap(e)).toList(),
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {"title": title, "items": items.map((e) => e.toMap()).toList()};
+  }
 }
 
 class ItemModel {
@@ -20,5 +24,9 @@ class ItemModel {
 
   factory ItemModel.fromMap(Map data) {
     return ItemModel(title: data["title"], idmateri: data['idamateri']);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {"title": title, "idmateri": "idmateri"};
   }
 }
