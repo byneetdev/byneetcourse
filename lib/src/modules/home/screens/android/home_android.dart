@@ -1,10 +1,10 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/dummy/listItem/dummyCarousel.dart';
+import 'package:byneetcourseapp/dummy/listItem/dummyClass.dart';
 import 'package:byneetcourseapp/src/modules/course/screens/android/courseGridAll_android.dart';
 import 'package:byneetcourseapp/src/modules/home/widgets/horizontalListItem_widget.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:byneetcourseapp/src/modules/home/widgets/carouselSwiper_widget.dart';
-import 'package:byneetcourseapp/dummy/carousel.dart';
 
 class HomeAndroid extends StatelessWidget {
   @override

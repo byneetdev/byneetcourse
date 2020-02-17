@@ -1,4 +1,4 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/dummy/model/kelas.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/screenshot_widget.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/theory_widget.dart';
 import 'package:clay_containers/clay_containers.dart';
@@ -59,7 +59,7 @@ class CourseDetailAndroid extends StatelessWidget {
                             color: Color(0xFFD2E0EF),
                             borderRadius: 16,
                             child: Hero(
-                              tag: kelas.name,
+                              tag: kelas.title,
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 180,
@@ -159,7 +159,7 @@ class CourseDetailAndroid extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        kelas.name,
+                        kelas.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -210,7 +210,7 @@ class CourseDetailAndroid extends StatelessWidget {
                             width: double.infinity,
                             height: 180,
                             child: ScreenshotWidget(
-                              screenshot: kelas.screenshot,
+                              screenshot: kelas.screenshots,
                             ),
                           ),
                         ),
@@ -242,7 +242,7 @@ class CourseDetailAndroid extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 15.0),
-                      TheoryWidget(theory: kelas.theory),
+                      TheoryWidget(theory: kelas.theories),
                     ],
                   ),
                 ),

@@ -1,4 +1,4 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/dummy/model/theory.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class EntryItem extends StatelessWidget {
   final Theory entry;
 
   Widget _buildTiles(Theory root) {
-    if (root.exam.isEmpty) return ListTile(title: Text(root.title));
+    if (root.exams.isEmpty) return ListTile(title: Text(root.title));
     return Padding(
       padding: const EdgeInsets.only(
         right: 8.0,
@@ -44,7 +44,7 @@ class EntryItem extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          children: root.exam.map((e) {
+          children: root.exams.map((e) {
             return ListTile(
               leading: Icon(Icons.lock),
               title: Text(e.title),

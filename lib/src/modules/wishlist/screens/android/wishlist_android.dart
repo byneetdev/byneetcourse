@@ -1,4 +1,4 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/dummy/listItem/dummyClass.dart';
 import 'package:byneetcourseapp/src/modules/wishlist/widgets/wishlist_widget.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';

@@ -1,7 +1,7 @@
+import 'package:byneetcourseapp/dummy/model/carousel.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:byneetcourseapp/dummy/carousel.dart';
 
 class CarouselSwiperWidget extends StatelessWidget {
   final List<Carousel> itemList;
@@ -67,7 +67,7 @@ class CarouselSwiperWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              carouselItem.name,
+                              carouselItem.title,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style: TextStyle(
@@ -86,7 +86,7 @@ class CarouselSwiperWidget extends StatelessWidget {
                         child: Chip(
                           backgroundColor: Color(0xFFFB1002),
                           label: Text(
-                            carouselItem.status,
+                            carouselItem.classStatus,
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w800,

@@ -1,4 +1,4 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/dummy/model/kelas.dart';
 import 'package:byneetcourseapp/src/modules/course/screens/android/courseDetail_android.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +41,7 @@ class WishListWidget extends StatelessWidget {
                 children: <Widget>[
                   //Gambar wishlist
                   Hero(
-                    tag: kelasData.name,
+                    tag: kelasData.title,
                     child: Container(
                       width: 110.0,
                       height: 120.0,
@@ -70,7 +70,7 @@ class WishListWidget extends StatelessWidget {
                             children: <Widget>[
                               //Nama item wishlist
                               Text(
-                                kelasData.name,
+                                kelasData.title,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                                 style: TextStyle(
@@ -105,7 +105,7 @@ class WishListWidget extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(13),
                                     ),
                                     child: Text(
-                                      kelasData.status,
+                                      kelasData.classStatus,
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   )

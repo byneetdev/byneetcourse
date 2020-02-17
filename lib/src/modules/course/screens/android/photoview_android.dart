@@ -1,4 +1,4 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/dummy/model/screenshot.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 

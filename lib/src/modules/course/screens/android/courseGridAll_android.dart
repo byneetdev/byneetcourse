@@ -1,4 +1,4 @@
-import 'package:byneetcourseapp/dummy/kelas.dart';
+import 'package:byneetcourseapp/dummy/listItem/dummyClass.dart';
 import 'package:byneetcourseapp/src/modules/course/screens/android/courseDetail_android.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +64,7 @@ class CourseGridAll extends StatelessWidget {
                     children: <Widget>[
                       //gambar
                       Hero(
-                        tag: kelas.name,
+                        tag: kelas.title,
                         child: Container(
                           width: MediaQuery.of(context).size.width,
                           height: 130.0,
@@ -95,7 +95,7 @@ class CourseGridAll extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 Text(
-                                  kelas.name,
+                                  kelas.title,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
                                   style: TextStyle(
@@ -125,7 +125,7 @@ class CourseGridAll extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4.0, horizontal: 7.0),
                                         child: Text(
-                                          kelas.status,
+                                          kelas.classStatus,
                                           style: TextStyle(
                                             fontSize: 13.0,
                                             color: Color(0xFF15140D),
