@@ -12,8 +12,9 @@ class PhotoViewAndroid extends StatelessWidget {
       appBar: AppBar(),
       body: Container(
         child: Hero(
-            tag: screenshot.urlimage,
-            child: PhotoView(imageProvider: AssetImage(screenshot.urlimage))),
+          tag: screenshot.urlimage,
+          child: PhotoView(imageProvider: AssetImage(screenshot.urlimage)),
+        ),
       ),
     );
   }
