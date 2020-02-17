@@ -13,7 +13,7 @@ class MycourseService with ChangeNotifier {
 
   Future<List<CourseModel>> getCollection() async {
     var res = await _api.getDataCollection();
-    if (res.documents.length > 1) {
+    if (res.documents.length > 0) {
       listMyCourse =
           res.documents.map((doc) => CourseModel.fromFirestore(doc)).toList();
       return listMyCourse;

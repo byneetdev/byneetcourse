@@ -1,17 +1,25 @@
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/screenshot_widget.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/theory_widget.dart';
+import 'package:byneetcourseapp/src/modules/login/login_service.dart';
+import 'package:byneetcourseapp/src/modules/wishlist/wishlist_service.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CourseDetailAndroid extends StatelessWidget {
   final CourseModel kelas;
   CourseDetailAndroid({@required this.kelas});
 
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LoginService>(context);
+
     return SafeArea(
       child: Scaffold(
+        key: _key,
         // appBar:
         body: Container(
           child: SingleChildScrollView(
@@ -141,7 +149,15 @@ class CourseDetailAndroid extends StatelessWidget {
                                     Icons.favorite_border,
                                     color: Color(0xFFFB1002),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    WishListService(user.user.uid)
+                                        .setWishlist(kelas)
+                                        .then((_) {
+                                      _key.currentState.showSnackBar(SnackBar(
+                                          content:
+                                              Text("Disimpan di WishLish!")));
+                                    });
+                                  },
                                 ),
                               )
                             ],
