@@ -48,7 +48,7 @@ class WishListWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           image: DecorationImage(
-                            image: AssetImage(kelasData.urlimage),
+                            image: NetworkImage(kelasData.urlimage),
                             fit: BoxFit.cover,
                           )),
                     ),

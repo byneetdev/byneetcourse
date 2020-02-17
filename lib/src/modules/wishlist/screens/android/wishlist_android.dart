@@ -1,5 +1,6 @@
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:byneetcourseapp/src/modules/login/login_service.dart';
+import 'package:byneetcourseapp/src/modules/nodata_container.dart';
 import 'package:byneetcourseapp/src/modules/wishlist/widgets/wishlist_widget.dart';
 import 'package:byneetcourseapp/src/modules/wishlist/wishlist_service.dart';
 import 'package:clay_containers/clay_containers.dart';
@@ -49,8 +50,7 @@ class WishlistAndroid extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.connectionState != ConnectionState.done)
                 return LoadingContainer();
-              if (!snapshot.hasData)
-                return Center(child: Text('something bad happend.'));
+              if (!snapshot.hasData) return NoDataContainer();
               return Container(
                 child: WishListWidget(
                   kelas: snapshot.data,

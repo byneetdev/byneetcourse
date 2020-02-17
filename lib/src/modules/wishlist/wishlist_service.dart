@@ -14,7 +14,7 @@ class WishListService with ChangeNotifier {
 
   Future<List<CourseModel>> getDataCollection() async {
     var res = await _api.getDataCollection();
-    if (res.documents.length > 1) {
+    if (res.documents.length > 0) {
       wishlist =
           res.documents.map((doc) => CourseModel.fromFirestore(doc)).toList();
       return wishlist;
@@ -22,7 +22,7 @@ class WishListService with ChangeNotifier {
     return null;
   }
 
-  Future<void> addWishlist(String id, CourseModel data) async {
-    await _api.setDocument(id, data.toMap());
+  Future<void> setWishlist(CourseModel data) async {
+    await _api.setDocument(data.id, data.toMap());
   }
 }
