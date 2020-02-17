@@ -52,7 +52,7 @@ class HorizontalListWidget extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 17.0),
             width: double.infinity,
-            height: 265,
+            height: 290,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
             ),
@@ -91,8 +91,8 @@ class FutureItemList extends StatelessWidget {
             padding: const EdgeInsets.only(right: 18.0, bottom: 10, left: 10),
             child: ClayContainer(
               borderRadius: 18,
-              height: 265,
-              width: 265,
+              height: 290,
+              width: 290,
               color: Color(0xFFD2E0EF),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +122,7 @@ class FutureItemList extends StatelessWidget {
                       borderRadius: 15,
                       spread: 0.5,
                       width: MediaQuery.of(context).size.width,
-                      height: 110,
+                      // height: 140,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Column(

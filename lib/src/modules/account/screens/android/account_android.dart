@@ -149,6 +149,7 @@ class AccountAndroid extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
+                      // Nambah Fitur di account
                       AccountWidget(
                         icon: Icon(Icons.android),
                         title: "Android",
@@ -157,6 +158,10 @@ class AccountAndroid extends StatelessWidget {
                         icon: Icon(Icons.settings_applications),
                         title: "Pengaturan",
                       ),
+                      AccountWidget(
+                        icon: Icon(Icons.exit_to_app),
+                        title: "Keluar",
+                      )
                     ],
                   ),
                 ),

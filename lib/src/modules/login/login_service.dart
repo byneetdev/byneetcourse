@@ -27,7 +27,7 @@ class LoginService with ChangeNotifier {
         var newInfo = UserUpdateInfo()
           ..displayName = nama
           ..photoUrl =
-              "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/98987.png?alt=media&token=8e0bef42-c551-4baa-8696-7de6a720bd43";
+              "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/Profile-512.png?alt=media&token=10ae0c14-c8d3-42e7-92ec-dfdc2af2989c";
         return value.user.updateProfile(newInfo);
       });
       return true;

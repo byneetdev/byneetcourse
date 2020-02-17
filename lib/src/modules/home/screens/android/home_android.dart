@@ -1,105 +1,120 @@
+import 'package:byneetcourseapp/src/modules/account/account_service.dart';
+import 'package:byneetcourseapp/src/modules/account/models/account_model_purin.dart';
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:byneetcourseapp/src/modules/course/screens/android/courseGridAll_android.dart';
 import 'package:byneetcourseapp/src/modules/home/home_service.dart';
 import 'package:byneetcourseapp/src/modules/home/models/carousel_model.dart';
 import 'package:byneetcourseapp/src/modules/home/widgets/horizontalListItem_widget.dart';
 import 'package:byneetcourseapp/src/modules/loading_container.dart';
+import 'package:byneetcourseapp/src/modules/login/login_service.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:byneetcourseapp/src/modules/home/widgets/carouselSwiper_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomeAndroid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFD2E0EF),
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(height: 40.0),
-              // nama + foto profil
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    //Nama user
-                    Text(
-                      "Byneet Courses",
-                      style: TextStyle(
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    //Foto user
-                    ClayContainer(
-                      height: 50,
-                      width: 50,
-                      borderRadius: 50,
-                      color: Color(0xFFD2E0EF),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.black12,
-                          backgroundImage: AssetImage('images/byneet3.PNG'),
+    final user = Provider.of<LoginService>(context).user;
+    return FutureBuilder<AccountModel>(
+      future: AccountService().cekDataUser(user.uid, <String, dynamic>{}),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return LoadingContainer();
+        }
+        return Scaffold(
+          backgroundColor: Color(0xFFD2E0EF),
+          body: Container(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 40.0),
+                  // nama + foto profil
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        //Nama user
+                        Text(
+                          "Byneet Courses",
+                          style: TextStyle(
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
+
+                        //Foto user
+                        ClayContainer(
+                          height: 50,
+                          width: 50,
+                          borderRadius: 50,
+                          color: Color(0xFFD2E0EF),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.black12,
+                              backgroundImage:
+                                  NetworkImage(snapshot.data.urlImg),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  //Custom Carousel
+                  Container(
+                    height: 220,
+                    child: FutureBuilder<List<CarouselModel>>(
+                        future: HomeService().getCarouselCollection(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState != ConnectionState.done)
+                            return LoadingContainer();
+                          if (!snapshot.hasData)
+                            return Center(
+                                child: Text('something bad happend.'));
+                          return CarouselSwiperWidget(
+                            itemList: snapshot.data, //future nya
+                          );
+                        }),
+                  ),
+                  SizedBox(height: 15.0),
+                  //horizonal item
+                  //container list item
+                  FutureBuilder<List<CourseModel>>(
+                      future: HomeService().getRecomendedCourseCollection(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState != ConnectionState.done)
+                          return LoadingContainer();
+                        if (!snapshot.hasData)
+                          return Center(child: Text('something bad happend.'));
+                        return HorizontalListWidget(
+                            listTitle: "Rekomendasi untuk kamu",
+                            kelasData: snapshot.data, // future
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CourseGridAll(),
+                                  ));
+                            });
+                      }),
+                  SizedBox(height: 15.0),
+                  //horizonal Widget
+                  //container list Widget
+                  // HorizontalListWidget(
+                  //   listTitle: "Best Seller",
+                  //   kelasData: dummyKelas, //future nya
+                  // ),
+                  SizedBox(height: 100)
+                ],
               ),
-              //Custom Carousel
-              Container(
-                height: 220,
-                child: FutureBuilder<List<CarouselModel>>(
-                    future: HomeService().getCarouselCollection(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState != ConnectionState.done)
-                        return LoadingContainer();
-                      if (!snapshot.hasData)
-                        return Center(child: Text('something bad happend.'));
-                      return CarouselSwiperWidget(
-                        itemList: snapshot.data, //future nya
-                      );
-                    }),
-              ),
-              SizedBox(height: 15.0),
-              //horizonal item
-              //container list item
-              FutureBuilder<List<CourseModel>>(
-                  future: HomeService().getRecomendedCourseCollection(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done)
-                      return LoadingContainer();
-                    if (!snapshot.hasData)
-                      return Center(child: Text('something bad happend.'));
-                    return HorizontalListWidget(
-                        listTitle: "Rekomendasi untuk kamu",
-                        kelasData: snapshot.data, // future
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CourseGridAll(),
-                              ));
-                        });
-                  }),
-              SizedBox(height: 15.0),
-              //horizonal Widget
-              //container list Widget
-              // HorizontalListWidget(
-              //   listTitle: "Best Seller",
-              //   kelasData: dummyKelas, //future nya
-              // ),
-              SizedBox(height: 100)
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

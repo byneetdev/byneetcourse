@@ -9,11 +9,23 @@ class PhotoViewAndroid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          color: Color(0xFFFB1002),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Container(
         child: Hero(
-            tag: screenshot + index.toString(),
-            child: PhotoView(imageProvider: NetworkImage(screenshot))),
+          tag: screenshot + index.toString(),
+          child: PhotoView(
+            imageProvider: NetworkImage(screenshot),
+          ),
+        ),
       ),
     );
   }
