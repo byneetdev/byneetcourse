@@ -141,9 +141,9 @@ class FutureItemList extends StatelessWidget {
                             ),
                             SizedBox(height: 5),
                             Text(
-                              "Dicky Reynaldi, Ph.D",
+                              kelas.creatorName,
                               overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
+                              // maxLines: 2,
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Color(0xFF83867C),
@@ -161,7 +161,7 @@ class FutureItemList extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 4.0, horizontal: 7.0),
                                     child: Text(
-                                      kelas.classStatus,
+                                      kelas.classStatus ?? "",
                                       style: TextStyle(
                                         fontSize: 18.0,
                                         color: Color(0xFF15140D),

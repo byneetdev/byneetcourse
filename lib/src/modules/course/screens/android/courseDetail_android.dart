@@ -34,7 +34,7 @@ class CourseDetailAndroid extends StatelessWidget {
                           bottomLeft: Radius.circular(16),
                           bottomRight: Radius.circular(16))),
                   child: Container(
-                    height: 370,
+                    height: 420,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -134,7 +134,17 @@ class CourseDetailAndroid extends StatelessWidget {
                                           color: Color(0xFFFB1002),
                                         ),
                                       ],
-                                    )
+                                    ),
+                                    SizedBox(height: 10),
+                                    //nama creator
+                                    Text(
+                                      kelas.creatorName,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

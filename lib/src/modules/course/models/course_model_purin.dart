@@ -5,7 +5,6 @@ class CourseModel {
   final String uid; // id kelas
   final String title; // judul kelas
   final String urlimage; // url gambar kelas
-  final String status;
   final String description;
   final List<Theory> theories; // list data teori
   final String classStatus; // status kelas premium atau gratis
@@ -17,7 +16,6 @@ class CourseModel {
   CourseModel({
     this.title,
     this.urlimage,
-    this.status,
     this.description,
     this.theories,
     this.uid,
@@ -32,8 +30,9 @@ class CourseModel {
       uid: doc.documentID,
       title: doc.data["name"],
       urlimage: doc.data["urlimage"],
-      status: doc.data["status"],
       description: doc.data["description"],
+      classStatus: doc.data["status"],
+      creatorName: doc.data["creatorName"],
       screenshots:
           (doc.data["screenshot"] as List).map((e) => e.toString()).toList(),
       theories: (doc.data["theories"] as List)
@@ -44,9 +43,10 @@ class CourseModel {
     return {
       "name": title,
       "urlimage": urlimage,
-      "status": status,
       "description": description,
       "screenshot": screenshots,
+      "status": classStatus,
+      "creatorName": creatorName,
       "theories": theories.map((e) => e.toMap()).toList()
     };
   }

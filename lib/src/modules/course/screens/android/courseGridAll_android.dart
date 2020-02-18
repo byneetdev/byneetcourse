@@ -140,7 +140,7 @@ class CourseGridAll extends StatelessWidget {
                                                       vertical: 4.0,
                                                       horizontal: 7.0),
                                               child: Text(
-                                                kelas.status,
+                                                kelas.classStatus,
                                                 style: TextStyle(
                                                   fontSize: 13.0,
                                                   color: Color(0xFF15140D),
