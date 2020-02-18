@@ -1,5 +1,6 @@
 import 'package:byneetcourseapp/src/modules/course/screens/android/photoview_android.dart';
 import 'package:flutter/material.dart';
+import 'package:byneetcourseapp/src/modules/course/widgets/customImage_widget.dart';
 
 class ScreenshotWidget extends StatelessWidget {
   final List<String> screenshot;
@@ -31,16 +32,11 @@ class ScreenshotWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Hero(
-              tag: screenshotImage + index.toString(),
-              child: Container(
-                width: 150,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    image: DecorationImage(
-                      image: NetworkImage(screenshotImage),
-                      fit: BoxFit.cover,
-                    )),
+            child: AspectRatio(
+              aspectRatio: 2.5 / 3.0,
+              child: CustomImageWidget(
+                heroTag: screenshotImage + index.toString(),
+                urlimage: screenshotImage,
               ),
             ),
           ),

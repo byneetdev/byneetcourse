@@ -3,6 +3,7 @@ import 'package:byneetcourseapp/src/modules/course/screens/android/courseDetail_
 import 'package:clay_containers/clay_containers.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:byneetcourseapp/src/modules/course/widgets/customImage_widget.dart';
 
 class HorizontalListWidget extends StatelessWidget {
   final String listTitle;
@@ -99,18 +100,11 @@ class FutureItemList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   //gambar
-                  Hero(
-                    tag: kelas.title,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 130.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: DecorationImage(
-                          image: NetworkImage(kelas.urlimage),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                  AspectRatio(
+                    aspectRatio: 6.0 / 3.0,
+                    child: CustomImageWidget(
+                      heroTag: kelas.uid,
+                      urlimage: kelas.urlimage,
                     ),
                   ),
 

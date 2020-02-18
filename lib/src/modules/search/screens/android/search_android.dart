@@ -63,52 +63,46 @@ class SearchAndroid extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 50.0),
-                Text(
-                  "Cari berdasarkan kategori",
-                  style: TextStyle(
-                    fontSize: 21.0,
-                    fontWeight: FontWeight.bold,
+                SizedBox(height: 35.0),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClayContainer(
+                    borderRadius: 16.0,
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    color: Color(0xFFD2E0EF),
+                    child: Container(
+                      margin: EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          image: DecorationImage(
+                            image: AssetImage("images/talent_search.png"),
+                            fit: BoxFit.cover,
+                          )),
+                    ),
                   ),
                 ),
-                SizedBox(height: 15.0),
-                //Kategori item Widget
-                CategoriesWidget(
-                  categoriesTitle: "Web Designer",
-                  onTap: () {
-                    print("Web Designer");
-                  },
-                  urlimage: "images/gambar1.jpg",
+                SizedBox(height: 20.0),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClayContainer(
+                    emboss: true,
+                    borderRadius: 16.0,
+                    width: MediaQuery.of(context).size.width,
+                    color: Color(0xFFD2E0EF),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Temukan kelas menarik, ayo jelajahi dunia dengan ilmu pengetahuan",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                CategoriesWidget(
-                  categoriesTitle: "Android Developer",
-                  onTap: () {
-                    print("Android Developer");
-                  },
-                  urlimage: "images/gambar1.jpg",
-                ),
-                CategoriesWidget(
-                  categoriesTitle: "Web Developer",
-                  onTap: () {
-                    print("Web Developer");
-                  },
-                  urlimage: "images/gambar1.jpg",
-                ),
-                CategoriesWidget(
-                  categoriesTitle: "Data Analyst",
-                  onTap: () {
-                    print("Data Analyst");
-                  },
-                  urlimage: "images/gambar1.jpg",
-                ),
-                CategoriesWidget(
-                  categoriesTitle: "Technical Network System",
-                  onTap: () {
-                    print("Technical Network System");
-                  },
-                  urlimage: "images/gambar1.jpg",
-                ),
-                SizedBox(height: 100)
               ],
             ),
           ),

@@ -5,6 +5,7 @@ import 'package:byneetcourseapp/src/modules/loading_screen.dart';
 import 'package:byneetcourseapp/src/modules/login/login_service.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:provider/provider.dart';
 
 class AccountAndroid extends StatelessWidget {
@@ -50,8 +51,9 @@ class AccountAndroid extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: CircleAvatar(
                                       backgroundColor: Colors.amber,
-                                      backgroundImage:
-                                          NetworkImage(snapshot.data.urlImg),
+                                      backgroundImage: AdvancedNetworkImage(
+                                          snapshot.data.urlImg,
+                                          useDiskCache: true),
                                     ),
                                   ),
                                 ),
