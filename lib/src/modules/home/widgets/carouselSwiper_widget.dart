@@ -67,7 +67,7 @@ class CarouselSwiperWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              carouselItem.name,
+                              carouselItem.title,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style: TextStyle(
@@ -86,7 +86,7 @@ class CarouselSwiperWidget extends StatelessWidget {
                         child: Chip(
                           backgroundColor: Color(0xFFFB1002),
                           label: Text(
-                            carouselItem.status,
+                            carouselItem.classStatus,
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w800,

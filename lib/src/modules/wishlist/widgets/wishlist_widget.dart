@@ -41,7 +41,7 @@ class WishListWidget extends StatelessWidget {
                 children: <Widget>[
                   //Gambar wishlist
                   Hero(
-                    tag: kelasData.name,
+                    tag: kelasData.title,
                     child: Container(
                       width: 110.0,
                       height: 120.0,
@@ -70,7 +70,7 @@ class WishListWidget extends StatelessWidget {
                             children: <Widget>[
                               //Nama item wishlist
                               Text(
-                                kelasData.name,
+                                kelasData.title,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                                 style: TextStyle(
@@ -105,7 +105,7 @@ class WishListWidget extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(13),
                                     ),
                                     child: Text(
-                                      kelasData.status,
+                                      kelasData.classStatus,
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   )

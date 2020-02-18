@@ -23,6 +23,6 @@ class WishListService with ChangeNotifier {
   }
 
   Future<void> setWishlist(CourseModel data) async {
-    await _api.setDocument(data.id, data.toMap());
+    await _api.setDocument(data.uid, data.toMap());
   }
 }

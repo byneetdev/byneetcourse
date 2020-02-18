@@ -75,7 +75,7 @@ class CourseGridAll extends StatelessWidget {
                           children: <Widget>[
                             //gambar
                             Hero(
-                              tag: kelas.name,
+                              tag: kelas.uid,
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 130.0,
@@ -108,7 +108,7 @@ class CourseGridAll extends StatelessWidget {
                                         MainAxisAlignment.spaceAround,
                                     children: <Widget>[
                                       Text(
-                                        kelas.name,
+                                        kelas.title,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
                                         style: TextStyle(

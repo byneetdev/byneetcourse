@@ -52,7 +52,7 @@ class HorizontalListWidget extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 17.0),
             width: double.infinity,
-            height: 290,
+            height: 280,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
             ),
@@ -91,15 +91,16 @@ class FutureItemList extends StatelessWidget {
             padding: const EdgeInsets.only(right: 18.0, bottom: 10, left: 10),
             child: ClayContainer(
               borderRadius: 18,
-              height: 290,
-              width: 290,
+              height: 280,
+              width: 250,
               color: Color(0xFFD2E0EF),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   //gambar
                   Hero(
-                    tag: kelas.name,
+                    tag: kelas.title,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: 130.0,
@@ -122,14 +123,15 @@ class FutureItemList extends StatelessWidget {
                       borderRadius: 15,
                       spread: 0.5,
                       width: MediaQuery.of(context).size.width,
-                      // height: 140,
+                      height: 130,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Text(
-                              kelas.name,
+                              kelas.title,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style: TextStyle(
@@ -159,7 +161,7 @@ class FutureItemList extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 4.0, horizontal: 7.0),
                                     child: Text(
-                                      kelas.status,
+                                      kelas.classStatus,
                                       style: TextStyle(
                                         fontSize: 18.0,
                                         color: Color(0xFF15140D),
