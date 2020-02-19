@@ -1,3 +1,5 @@
+import 'package:byneetcourseapp/src/modules/account/account_service.dart';
+import 'package:byneetcourseapp/src/modules/account/models/account_model_purin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -9,6 +11,7 @@ class LoginService with ChangeNotifier {
   FirebaseUser _user;
   GoogleSignIn _googleSignIn;
   Status _status = Status.Uninitialized;
+  AccountModel _account;
 
   LoginService.instance()
       : _auth = FirebaseAuth.instance,
@@ -18,6 +21,7 @@ class LoginService with ChangeNotifier {
 
   Status get status => _status;
   FirebaseUser get user => _user;
+  AccountModel get account => _account;
 
   Future<bool> register(String email, String password, String nama) async {
     try {
@@ -88,6 +92,11 @@ class LoginService with ChangeNotifier {
 
       //tiap login/buka app,getdata detail user, lalu disimpan di Accountservice:AccountDetail; dak jadi ak boros mana wkwkw
       // AccountService().getDocumentById(firebaseUser.uid);
+      AccountService().cekDataUser(firebaseUser.uid, <String, dynamic>{
+        "nama": user.displayName,
+        "urlImg":
+            "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/98987.png?alt=media&token=8e0bef42-c551-4baa-8696-7de6a720bd43"
+      }).then((value) => _account = value);
 
       _status = Status.Authenticated;
     }
