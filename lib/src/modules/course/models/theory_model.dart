@@ -12,21 +12,32 @@ class Theory {
   }
 
   Map<String, dynamic> toMap() {
-    return {"title": title, "items": items.map((e) => e.toMap()).toList()};
+    return {
+      "title": title,
+      "items": items.map((e) => e.toMap()).toList(),
+    };
   }
 }
 
 class ItemModel {
   final String title;
   final String idmateri;
+  final bool isdone;
 
-  ItemModel({this.title, this.idmateri});
+  ItemModel({this.title, this.idmateri, this.isdone});
 
   factory ItemModel.fromMap(Map data) {
-    return ItemModel(title: data["title"], idmateri: data['idamateri']);
+    return ItemModel(
+      title: data["title"],
+      idmateri: data['idamateri'],
+      isdone: data["isdone"] ?? false,
+    );
   }
 
   Map<String, dynamic> toMap() {
-    return {"title": title, "idmateri": "idmateri"};
+    return {
+      "title": title,
+      "idmateri": idmateri,
+    };
   }
 }

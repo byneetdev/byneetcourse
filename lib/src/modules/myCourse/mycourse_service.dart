@@ -1,4 +1,5 @@
 import 'package:byneetcourseapp/src/kutils/api.dart';
+import 'package:byneetcourseapp/src/modules/course/course_service.dart';
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -6,8 +7,10 @@ class MycourseService with ChangeNotifier {
   final String idUser;
   Api _api;
   MycourseService(this.idUser) {
-    _api = Api('users/$idUser/wishlist');
+    _api = Api('users/$idUser/mycourses');
   }
+
+  final _courseService = CourseService();
 
   List<CourseModel> listMyCourse;
 
@@ -21,7 +24,7 @@ class MycourseService with ChangeNotifier {
     return null;
   }
 
-  Future<void> addDocument(CourseModel data) async {
+  Future<void> setDocument(CourseModel data) async {
     await _api.setDocument(data.id, data.toMap());
   }
 }

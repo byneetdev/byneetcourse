@@ -11,7 +11,7 @@ class CourseDetailAndroid extends StatelessWidget {
   final CourseModel kelas;
   CourseDetailAndroid({@required this.kelas});
 
-  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {

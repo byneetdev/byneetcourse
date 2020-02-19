@@ -5,7 +5,10 @@ class NoDataContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        child: Text('No data'),
+        child: Image.asset(
+          'images/nodata.png',
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
