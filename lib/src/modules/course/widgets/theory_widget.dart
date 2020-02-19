@@ -1,6 +1,7 @@
 import 'package:byneetcourseapp/src/modules/course/models/theory_model.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:byneetcourseapp/src/modules/course/screens/android/theoryDetail_android.dart';
 
 class TheoryWidget extends StatelessWidget {
   final List<Theory> theory;
@@ -23,7 +24,7 @@ class EntryItem extends StatelessWidget {
 
   final Theory entry;
 
-  Widget _buildTiles(Theory root) {
+  Widget _buildTiles(Theory root, BuildContext context) {
     if (root.items.isEmpty) return ListTile(title: Text(root.title));
     return Padding(
       padding: const EdgeInsets.only(
@@ -46,6 +47,13 @@ class EntryItem extends StatelessWidget {
           ),
           children: root.items.map((e) {
             return ListTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TheoryDetailAndroid(),
+                    ));
+              },
               leading: Icon(Icons.lock),
               title: Text(e.title),
             );
@@ -57,6 +65,6 @@ class EntryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildTiles(entry);
+    return _buildTiles(entry, context);
   }
 }
