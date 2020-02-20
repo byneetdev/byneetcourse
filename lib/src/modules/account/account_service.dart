@@ -18,7 +18,7 @@ class AccountService with ChangeNotifier {
     return;
   }
 
-  Future setDocument(String id, Map data) async {
+  Future setDocument(String id, Map<String, dynamic> data) async {
     await _api.setDocument(id, data);
     return;
   }

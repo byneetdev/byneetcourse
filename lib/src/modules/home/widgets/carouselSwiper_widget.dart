@@ -1,4 +1,3 @@
-import 'package:byneetcourseapp/src/modules/course/widgets/customImage_widget.dart';
 import 'package:byneetcourseapp/src/modules/home/models/carousel_model.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,3 @@
-import 'package:byneetcourseapp/src/modules/search/widgets/categories_widget.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 

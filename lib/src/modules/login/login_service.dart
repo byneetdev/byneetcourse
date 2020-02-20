@@ -23,16 +23,21 @@ class LoginService with ChangeNotifier {
   FirebaseUser get user => _user;
   AccountModel get account => _account;
 
-  Future<bool> register(String email, String password, String nama) async {
+  Future<bool> register(
+      String email, String password, String nama, String keahlian) async {
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        var newInfo = UserUpdateInfo()
-          ..displayName = nama
-          ..photoUrl =
-              "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/Profile-512.png?alt=media&token=10ae0c14-c8d3-42e7-92ec-dfdc2af2989c";
-        return value.user.updateProfile(newInfo);
+        AccountService().setDocument(value.user.uid, {
+          "nama": nama,
+          "keahlian": keahlian,
+          "urlImg":
+              "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/98987.png?alt=media&token=8e0bef42-c551-4baa-8696-7de6a720bd43"
+        }).then((_) => AccountService()
+            .getDocumentById(value.user.uid)
+            .then((value) => _account = value));
+        notifyListeners();
       });
       return true;
     } catch (e) {
@@ -92,13 +97,15 @@ class LoginService with ChangeNotifier {
 
       //tiap login/buka app,getdata detail user, lalu disimpan di Accountservice:AccountDetail; dak jadi ak boros mana wkwkw
       // AccountService().getDocumentById(firebaseUser.uid);
-      AccountService().cekDataUser(firebaseUser.uid, <String, dynamic>{
+      await AccountService().cekDataUser(firebaseUser.uid, <String, dynamic>{
         "nama": user.displayName,
         "urlImg":
             "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/98987.png?alt=media&token=8e0bef42-c551-4baa-8696-7de6a720bd43"
-      }).then((value) => _account = value);
+      }).then((value) {
+        _account = value;
 
-      _status = Status.Authenticated;
+        _status = Status.Authenticated;
+      });
     }
     notifyListeners();
   }

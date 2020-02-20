@@ -1,5 +1,4 @@
 import 'package:byneetcourseapp/src/kutils/api.dart';
-import 'package:byneetcourseapp/src/modules/course/course_service.dart';
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -9,8 +8,6 @@ class MycourseService with ChangeNotifier {
   MycourseService(this.idUser) {
     _api = Api('users/$idUser/mycourses');
   }
-
-  final _courseService = CourseService();
 
   List<CourseModel> listMyCourse;
 

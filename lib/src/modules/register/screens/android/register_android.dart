@@ -1,6 +1,8 @@
+import 'package:byneetcourseapp/src/modules/login/login_service.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:byneetcourseapp/src/modules/register/widgets/textfield_widget.dart';
+import 'package:provider/provider.dart';
 
 class RegisterAndroid extends StatefulWidget {
   @override
@@ -169,8 +171,13 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                     // curveType: CurveType.none,
                     // emboss: true,
                     // spread: 1,
-                    onPressed: () {
-                      if (formKey.currentState.validate()) {}
+                    onPressed: () async {
+                      if (formKey.currentState.validate()) {
+                        Provider.of<LoginService>(context, listen: false)
+                            .register(emailCtrl.text, passCtrl.text,
+                                namaLengkapCtrl.text, keahlianCtrl.text)
+                            .then((value) => null);
+                      }
                     },
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),

@@ -19,7 +19,7 @@ class NoDataContainer extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
                   image: DecorationImage(
-                    image: AssetImage('images/404_illustration.jpg'),
+                    image: AssetImage('images/nodata.png'),
                     fit: BoxFit.cover,
                   )),
             ),

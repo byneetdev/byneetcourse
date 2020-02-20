@@ -146,9 +146,14 @@ class AccountAndroid extends StatelessWidget {
                   icon: Icon(Icons.settings_applications),
                   title: "Pengaturan",
                 ),
-                AccountWidget(
-                  icon: Icon(Icons.exit_to_app),
-                  title: "Keluar",
+                GestureDetector(
+                  onTap: () {
+                    user.signOut();
+                  },
+                  child: AccountWidget(
+                    icon: Icon(Icons.exit_to_app),
+                    title: "Keluar",
+                  ),
                 )
               ],
             ),
