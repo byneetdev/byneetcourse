@@ -176,7 +176,8 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                         Provider.of<LoginService>(context, listen: false)
                             .register(emailCtrl.text, passCtrl.text,
                                 namaLengkapCtrl.text, keahlianCtrl.text)
-                            .then((value) => null);
+                            .then((value) => Navigator.pop(context));
+                        //nanti di buat loading untuk menu utama hehe
                       }
                     },
                     shape: RoundedRectangleBorder(
