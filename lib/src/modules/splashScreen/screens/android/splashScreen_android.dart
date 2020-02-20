@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:byneetcourseapp/src/modules/introduction/screens/android/intro_android.dart';
 import 'package:byneetcourseapp/src/modules/login/login_service.dart';
+import 'package:byneetcourseapp/src/modules/login/screens/android/login_android.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(
           builder: (BuildContext context) =>
               Consumer<LoginService>(builder: (context, user, _) {
-            if (user.status != Status.Authenticated) return IntroAndroid();
+            if (user.status != Status.Authenticated) return LoginAndroid();
             return BottomNavBar();
           }),
         ));

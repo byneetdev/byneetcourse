@@ -1,5 +1,6 @@
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:byneetcourseapp/src/modules/course/screens/android/courseDetail_android.dart';
+import 'package:byneetcourseapp/src/tools/constColor.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
@@ -34,16 +35,10 @@ class HorizontalListWidget extends StatelessWidget {
                   ),
                 ),
                 //tombol navigasi ke list all
-                ClayContainer(
-                  color: Color(0xFFD2E0EF),
-                  height: 35,
-                  width: 35,
-                  borderRadius: 50,
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_forward_ios),
-                    iconSize: 20,
-                    onPressed: onPressed,
-                  ),
+                IconButton(
+                  icon: Icon(Icons.arrow_forward_ios),
+                  iconSize: 20,
+                  onPressed: onPressed,
                 ),
               ],
             ),
@@ -53,7 +48,7 @@ class HorizontalListWidget extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 17.0),
             width: double.infinity,
-            height: 280,
+            height: 300,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
             ),
@@ -88,114 +83,90 @@ class FutureItemList extends StatelessWidget {
                   builder: (context) => CourseDetailAndroid(kelas: kelas),
                 ));
           },
-          child: Padding(
-            padding: const EdgeInsets.only(right: 18.0, bottom: 10, left: 10),
-            child: ClayContainer(
-              borderRadius: 18,
-              height: 280,
+          child: Card(
+            elevation: 7,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0)),
+            child: Container(
+              height: 320,
               width: 250,
-              color: Color(0xFFD2E0EF),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   //gambar
                   AspectRatio(
-                    aspectRatio: 6.0 / 3.0,
+                    aspectRatio: 6.0 / 3.5,
                     child: CustomImageWidget(
                       heroTag: kelas.uid,
                       urlimage: kelas.urlimage,
                     ),
                   ),
-
+                  SizedBox(height: 5),
                   //Nama kelas
                   Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ClayContainer(
-                      emboss: true,
-                      color: Color(0xFFD2E0EF),
-                      borderRadius: 15,
-                      spread: 0.5,
-                      width: MediaQuery.of(context).size.width,
-                      height: 130,
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Text(
+                          kelas.title,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: CustomColor.textColorPrimary,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          kelas.creatorName,
+                          overflow: TextOverflow.ellipsis,
+                          // maxLines: 2,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: CustomColor.textColorSecondary,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Row(
                           children: <Widget>[
-                            Text(
-                              kelas.title,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(14.0),
+                                color: CustomColor.buttonColor,
+                              ),
+                              child: Text(
+                                kelas.classStatus ?? "",
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                            SizedBox(height: 5),
-                            Text(
-                              kelas.creatorName,
-                              overflow: TextOverflow.ellipsis,
-                              // maxLines: 2,
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Color(0xFF83867C),
-                              ),
-                            ),
-                            SizedBox(height: 10),
+                            SizedBox(width: 13),
                             Row(
                               children: <Widget>[
-                                ClayContainer(
-                                  color: Color(0xFFD2E0EF),
-                                  borderRadius: 13,
-                                  emboss: true,
-                                  curveType: CurveType.convex,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 4.0, horizontal: 7.0),
-                                    child: Text(
-                                      kelas.classStatus ?? "",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Color(0xFF15140D),
-                                      ),
-                                    ),
-                                  ),
+                                Icon(
+                                  Icons.star,
+                                  color: Color(0xFFFB1002),
                                 ),
-                                SizedBox(width: 13),
-                                ClayContainer(
-                                  color: Color(0xFFD2E0EF),
-                                  emboss: true,
-                                  curveType: CurveType.convex,
-                                  borderRadius: 13,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 4.0, horizontal: 7.0),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.star,
-                                          color: Color(0xFFFB1002),
-                                        ),
-                                        SizedBox(width: 10),
-                                        Text(
-                                          "4.8",
-                                          style: TextStyle(
-                                            fontSize: 15.0,
-                                            color: Color(0xFF15140D),
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                SizedBox(width: 5),
+                                Text(
+                                  "4.8",
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color(0xFF15140D),
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ],
-                            )
+                            ),
                           ],
-                        ),
-                      ),
+                        )
+                      ],
                     ),
                   ),
                 ],

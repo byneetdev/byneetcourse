@@ -1,7 +1,9 @@
 import 'package:byneetcourseapp/src/modules/home/models/carousel_model.dart';
+import 'package:byneetcourseapp/src/tools/constColor.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_networkimage/provider.dart';
+import 'package:flutter_advanced_networkimage/transition.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class CarouselSwiperWidget extends StatelessWidget {
@@ -13,91 +15,74 @@ class CarouselSwiperWidget extends StatelessWidget {
     return Swiper(
       itemCount: itemList.length,
       autoplay: true,
+      itemWidth: 250,
+      // itemHeight: 200,
+      layout: SwiperLayout.CUSTOM,
+      customLayoutOption: new CustomLayoutOption(startIndex: -1, stateCount: 3)
+          .addRotate([-45.0 / 180, 0.0, 45.0 / 180]).addTranslate([
+        new Offset(-370.0, -40.0),
+        new Offset(0.0, 0.0),
+        new Offset(370.0, -40.0)
+      ]),
       itemBuilder: (context, index) {
         final carouselItem = itemList[index];
-        return Padding(
-          padding: EdgeInsets.all(15),
-          child: Card(
-            elevation: 10,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ClayContainer(
-              borderRadius: 15,
-              surfaceColor: Color(0xFFD2E0EF),
-              // color: Color(0xFFD2E0EF),
-              spread: 10,
-              child: Container(
-                margin: EdgeInsets.all(3),
-                decoration: BoxDecoration(
-                  color: Color(0xFFD2E0EF),
-                  borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(
-                    image: AdvancedNetworkImage(carouselItem.urlimage,
-                        useDiskCache: true),
-                    fit: BoxFit.cover,
+        return InkWell(
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Material(
+                  elevation: 8,
+                  borderRadius: BorderRadius.circular(16),
+                  child: Container(
+                    width: 250,
+                    height: 150,
+                    child: TransitionToImage(
+                      borderRadius: BorderRadius.circular(16),
+                      image: AdvancedNetworkImage(
+                        carouselItem.urlimage,
+                        useDiskCache: true,
+                      ),
+                      fit: BoxFit.cover,
+                      placeholder: Container(
+                        width: 100,
+                        height: 100,
+                        child: Center(
+                          child: Icon(Icons.error),
+                        ),
+                      ),
+                      loadingWidget: Container(
+                        width: 100,
+                        height: 100,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                child: Stack(
-                  children: <Widget>[
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.black54,
-                              Colors.black12,
-                              Colors.black87,
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 17.0,
-                      top: 105.0,
-                      child: Container(
-                        width: 280,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              carouselItem.title,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              style: TextStyle(
-                                fontSize: 23.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                        top: 10,
-                        right: 17,
-                        child: Chip(
-                          backgroundColor: Color(0xFFFB1002),
-                          label: Text(
-                            carouselItem.classStatus,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ))
-                  ],
+                SizedBox(height: 6),
+                Text(
+                  carouselItem.title,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: CustomColor.textColorPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
+                SizedBox(height: 3),
+                Text(
+                  carouselItem.classStatus,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: CustomColor.textColorSecondary,
+                    // fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
         );

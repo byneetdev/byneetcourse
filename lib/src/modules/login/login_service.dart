@@ -37,13 +37,12 @@ class LoginService with ChangeNotifier {
         }).then((_) => AccountService()
             .getDocumentById(value.user.uid)
             .then((value) => _account = value));
-        _status = Status.Authenticating;
+
         notifyListeners();
       });
       return true;
     } catch (e) {
       print(e);
-      _status = Status.Unauthenticated;
       return false;
     }
   }

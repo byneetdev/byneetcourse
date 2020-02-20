@@ -26,17 +26,11 @@ class _CourseGridAllState extends State<CourseGridAll>
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ClayContainer(
-            width: 28,
-            height: 28,
-            borderRadius: 28,
-            color: Color(0xFFD2E0EF),
-            child: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
-          ),
+          child: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
         ),
       ),
       body: FutureBuilder<List<CourseModel>>(
