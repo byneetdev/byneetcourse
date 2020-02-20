@@ -3,6 +3,7 @@ import 'package:byneetcourseapp/src/modules/course/screens/android/courseDetail_
 import 'package:clay_containers/clay_containers.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:byneetcourseapp/src/modules/course/widgets/customImage_widget.dart';
 
 class HorizontalListWidget extends StatelessWidget {
   final String listTitle;
@@ -52,7 +53,7 @@ class HorizontalListWidget extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 17.0),
             width: double.infinity,
-            height: 265,
+            height: 280,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
             ),
@@ -91,25 +92,19 @@ class FutureItemList extends StatelessWidget {
             padding: const EdgeInsets.only(right: 18.0, bottom: 10, left: 10),
             child: ClayContainer(
               borderRadius: 18,
-              height: 265,
-              width: 265,
+              height: 280,
+              width: 250,
               color: Color(0xFFD2E0EF),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   //gambar
-                  Hero(
-                    tag: kelas.name,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 130.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: DecorationImage(
-                          image: NetworkImage(kelas.urlimage),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                  AspectRatio(
+                    aspectRatio: 6.0 / 3.0,
+                    child: CustomImageWidget(
+                      heroTag: kelas.uid,
+                      urlimage: kelas.urlimage,
                     ),
                   ),
 
@@ -122,14 +117,15 @@ class FutureItemList extends StatelessWidget {
                       borderRadius: 15,
                       spread: 0.5,
                       width: MediaQuery.of(context).size.width,
-                      height: 110,
+                      height: 130,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Text(
-                              kelas.name,
+                              kelas.title,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style: TextStyle(
@@ -139,9 +135,9 @@ class FutureItemList extends StatelessWidget {
                             ),
                             SizedBox(height: 5),
                             Text(
-                              "Dicky Reynaldi, Ph.D",
+                              kelas.creatorName,
                               overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
+                              // maxLines: 2,
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Color(0xFF83867C),
@@ -159,7 +155,7 @@ class FutureItemList extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 4.0, horizontal: 7.0),
                                     child: Text(
-                                      kelas.status,
+                                      kelas.classStatus ?? "",
                                       style: TextStyle(
                                         fontSize: 18.0,
                                         color: Color(0xFF15140D),

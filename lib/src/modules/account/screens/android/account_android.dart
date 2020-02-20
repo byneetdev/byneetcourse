@@ -1,10 +1,8 @@
-import 'package:byneetcourseapp/src/modules/account/account_service.dart';
-import 'package:byneetcourseapp/src/modules/account/models/account_model_purin.dart';
 import 'package:byneetcourseapp/src/modules/account/widgets/account_widget.dart';
-import 'package:byneetcourseapp/src/modules/loading_screen.dart';
 import 'package:byneetcourseapp/src/modules/login/login_service.dart';
 import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:provider/provider.dart';
 
 class AccountAndroid extends StatelessWidget {
@@ -40,8 +38,9 @@ class AccountAndroid extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: CircleAvatar(
                                 backgroundColor: Colors.amber,
-                                backgroundImage:
-                                    NetworkImage(user.account.urlImg),
+                                backgroundImage: AdvancedNetworkImage(
+                                    user.account.urlImg,
+                                    useDiskCache: true),
                               ),
                             ),
                           ),
@@ -138,6 +137,7 @@ class AccountAndroid extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                // Nambah Fitur di account
                 AccountWidget(
                   icon: Icon(Icons.android),
                   title: "Android",
@@ -146,6 +146,10 @@ class AccountAndroid extends StatelessWidget {
                   icon: Icon(Icons.settings_applications),
                   title: "Pengaturan",
                 ),
+                AccountWidget(
+                  icon: Icon(Icons.exit_to_app),
+                  title: "Keluar",
+                )
               ],
             ),
           ),

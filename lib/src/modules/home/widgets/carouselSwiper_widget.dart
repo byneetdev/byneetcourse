@@ -1,6 +1,8 @@
+import 'package:byneetcourseapp/src/modules/course/widgets/customImage_widget.dart';
 import 'package:byneetcourseapp/src/modules/home/models/carousel_model.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class CarouselSwiperWidget extends StatelessWidget {
@@ -27,12 +29,13 @@ class CarouselSwiperWidget extends StatelessWidget {
               // color: Color(0xFFD2E0EF),
               spread: 10,
               child: Container(
-                // padding: EdgeInsets.all(12),
+                margin: EdgeInsets.all(3),
                 decoration: BoxDecoration(
                   color: Color(0xFFD2E0EF),
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                    image: NetworkImage(carouselItem.urlimage),
+                    image: AdvancedNetworkImage(carouselItem.urlimage,
+                        useDiskCache: true),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -48,9 +51,9 @@ class CarouselSwiperWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                           gradient: LinearGradient(
                             colors: [
-                              Colors.black87,
-                              Colors.black12,
                               Colors.black54,
+                              Colors.black12,
+                              Colors.black87,
                             ],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
@@ -67,7 +70,7 @@ class CarouselSwiperWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              carouselItem.name,
+                              carouselItem.title,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style: TextStyle(
@@ -86,7 +89,7 @@ class CarouselSwiperWidget extends StatelessWidget {
                         child: Chip(
                           backgroundColor: Color(0xFFFB1002),
                           label: Text(
-                            carouselItem.status,
+                            carouselItem.classStatus,
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w800,

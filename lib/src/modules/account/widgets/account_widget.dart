@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class AccountWidget extends StatelessWidget {
   final Icon icon;
   final String title;
-  AccountWidget({this.icon, this.title});
+  AccountWidget({@required this.icon, @required this.title});
 
   @override
   Widget build(BuildContext context) {

@@ -25,6 +25,6 @@ class MycourseService with ChangeNotifier {
   }
 
   Future<void> setDocument(CourseModel data) async {
-    await _api.setDocument(data.id, data.toMap());
+    await _api.setDocument(data.uid, data.toMap());
   }
 }

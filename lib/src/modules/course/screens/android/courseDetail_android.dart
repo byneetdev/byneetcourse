@@ -1,5 +1,6 @@
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/screenshot_widget.dart';
+import 'package:byneetcourseapp/src/modules/course/widgets/customImage_widget.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/theory_widget.dart';
 import 'package:byneetcourseapp/src/modules/login/login_service.dart';
 import 'package:byneetcourseapp/src/modules/wishlist/wishlist_service.dart';
@@ -34,7 +35,7 @@ class CourseDetailAndroid extends StatelessWidget {
                           bottomLeft: Radius.circular(16),
                           bottomRight: Radius.circular(16))),
                   child: Container(
-                    height: 370,
+                    height: 420,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -66,18 +67,11 @@ class CourseDetailAndroid extends StatelessWidget {
                           child: ClayContainer(
                             color: Color(0xFFD2E0EF),
                             borderRadius: 16,
-                            child: Hero(
-                              tag: kelas.name,
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 180,
-                                margin: EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  image: DecorationImage(
-                                      image: NetworkImage(kelas.urlimage),
-                                      fit: BoxFit.cover),
-                                ),
+                            child: AspectRatio(
+                              aspectRatio: 4.5 / 3.0, //? tuk ukuran gambar
+                              child: CustomImageWidget(
+                                heroTag: kelas.uid,
+                                urlimage: kelas.urlimage,
                               ),
                             ),
                           ),
@@ -134,7 +128,17 @@ class CourseDetailAndroid extends StatelessWidget {
                                           color: Color(0xFFFB1002),
                                         ),
                                       ],
-                                    )
+                                    ),
+                                    SizedBox(height: 10),
+                                    //nama creator
+                                    Text(
+                                      kelas.creatorName,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -175,7 +179,7 @@ class CourseDetailAndroid extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        kelas.name,
+                        kelas.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -226,7 +230,7 @@ class CourseDetailAndroid extends StatelessWidget {
                             width: double.infinity,
                             height: 180,
                             child: ScreenshotWidget(
-                              screenshot: kelas.screenshot,
+                              screenshot: kelas.screenshots,
                             ),
                           ),
                         ),
@@ -258,7 +262,9 @@ class CourseDetailAndroid extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 15.0),
-                      TheoryWidget(theory: kelas.theories)
+
+                      //? Expansion tile materi2
+                      TheoryWidget(theory: kelas.theories),
                     ],
                   ),
                 ),
