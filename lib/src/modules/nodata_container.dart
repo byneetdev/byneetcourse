@@ -1,5 +1,4 @@
 import 'package:byneetcourseapp/src/modules/course/screens/android/courseGridAll_android.dart';
-import 'package:clay_containers/widgets/clay_containers.dart';
 import 'package:flutter/material.dart';
 
 class NoDataContainer extends StatelessWidget {
@@ -9,8 +8,7 @@ class NoDataContainer extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 17.0, vertical: 15.0),
       child: Column(
         children: <Widget>[
-          ClayContainer(
-            borderRadius: 16.0,
+          Container(
             width: MediaQuery.of(context).size.width,
             height: 200,
             color: Color(0xFFD2E0EF),
@@ -25,10 +23,8 @@ class NoDataContainer extends StatelessWidget {
             ),
           ),
           SizedBox(height: 15),
-          ClayContainer(
-            emboss: true,
+          Container(
             color: Color(0xFFD2E0EF),
-            borderRadius: 12,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 3.0,
@@ -44,10 +40,8 @@ class NoDataContainer extends StatelessWidget {
             ),
           ),
           SizedBox(height: 15),
-          ClayContainer(
-            emboss: true,
+          Container(
             color: Color(0xFFD2E0EF),
-            borderRadius: 12,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 3.0,
@@ -64,9 +58,9 @@ class NoDataContainer extends StatelessWidget {
             ),
           ),
           SizedBox(height: 25),
-          ClayContainer(
+          Container(
             color: Color(0xFFD2E0EF),
-            borderRadius: 14,
+            // borderRadius: 14,
             child: Container(
               margin: EdgeInsets.all(3),
               width: 150,

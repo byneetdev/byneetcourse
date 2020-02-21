@@ -1,4 +1,4 @@
-import 'package:byneetcourseapp/src/modules/login/login_service.dart';
+import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

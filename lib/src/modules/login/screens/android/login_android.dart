@@ -1,8 +1,8 @@
-import 'package:byneetcourseapp/src/modules/login/login_service.dart';
+import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
 import 'package:byneetcourseapp/src/modules/register/screens/android/register_android.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
-import 'package:byneetcourseapp/src/tools/fadeAnimation.dart';
 import 'package:byneetcourseapp/src/widgets/customButton_widget.dart';
+import 'package:byneetcourseapp/src/widgets/customFadeAnimation_widget.dart';
 import 'package:byneetcourseapp/src/widgets/customTextfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:byneetcourseapp/src/modules/forgotPassword/screens/android/forgotPassword_android.dart';
@@ -56,7 +56,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(height: 80),
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1,
                     Text(
                       "Sign in",
@@ -66,7 +66,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
                       ),
                     ),
                   ),
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.5,
                     Text(
                       "Selamat datang",
@@ -78,7 +78,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
                   ),
                   SizedBox(height: 28),
                   //textformfield email
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.7,
                     CustomTextFieldWidget(
                       isEmail: true,
@@ -92,7 +92,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
                   SizedBox(height: 20),
                   //textformfield email
                   //mau di buat widget tapi bingung karne ad focusNode :D
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.8,
                     TextFormField(
                       obscureText: true,
@@ -124,7 +124,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
                     ),
                   ),
                   SizedBox(height: 12),
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     2.0,
                     Align(
                       alignment: Alignment.bottomRight,
@@ -149,7 +149,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
                   ),
                   SizedBox(height: 15),
                   //tombol login
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     2.0,
                     CustomButtonWidget(
                       onPressed: () {
@@ -162,7 +162,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
                   ),
                   SizedBox(height: 16),
                   Center(
-                    child: FadeAnimation(
+                    child: CustomFadeAnimation(
                       2.1,
                       InkWell(
                         onTap: () {
@@ -204,7 +204,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     2.2,
                     Align(
                       alignment: Alignment.center,

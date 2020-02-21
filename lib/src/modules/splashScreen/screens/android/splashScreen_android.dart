@@ -1,7 +1,5 @@
 import 'dart:async';
-
-import 'package:byneetcourseapp/src/modules/introduction/screens/android/intro_android.dart';
-import 'package:byneetcourseapp/src/modules/login/login_service.dart';
+import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
 import 'package:byneetcourseapp/src/modules/login/screens/android/login_android.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

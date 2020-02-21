@@ -1,6 +1,6 @@
 import 'package:byneetcourseapp/src/tools/constColor.dart';
-import 'package:byneetcourseapp/src/tools/fadeAnimation.dart';
 import 'package:byneetcourseapp/src/widgets/customButton_widget.dart';
+import 'package:byneetcourseapp/src/widgets/customFadeAnimation_widget.dart';
 import 'package:byneetcourseapp/src/widgets/customTextfield_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +34,7 @@ class ForgotPasswordAndroid extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(height: 40),
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.0,
                     Text(
                       "Lupa Password",
@@ -45,7 +45,7 @@ class ForgotPasswordAndroid extends StatelessWidget {
                       ),
                     ),
                   ),
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.2,
                     Text(
                       "Jika kamu menekan reset, maka kamu akan mendapatkan password baru melalui email kamu",
@@ -59,7 +59,7 @@ class ForgotPasswordAndroid extends StatelessWidget {
                   SizedBox(height: 28),
                   //textformfield email
                   //mau di buat widget tapi bingung karne ad focusNode :D
-                  FadeAnimation(
+                  CustomFadeAnimation(
                       1.4,
                       CustomTextFieldWidget(
                         isEmail: false,
@@ -68,7 +68,7 @@ class ForgotPasswordAndroid extends StatelessWidget {
                         hintText: "Email Address",
                       )),
                   SizedBox(height: 50),
-                  FadeAnimation(1.3,
+                  CustomFadeAnimation(1.3,
                       CustomButtonWidget(onPressed: () {}, title: "RESET")),
                   SizedBox(height: 16),
                 ],

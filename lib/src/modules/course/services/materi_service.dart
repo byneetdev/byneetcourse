@@ -1,7 +1,6 @@
-import 'package:byneetcourseapp/src/kutils/api.dart';
+import 'package:byneetcourseapp/src/modules/course/models/materi_model.dart';
+import 'package:byneetcourseapp/src/utils/api.dart';
 import 'package:flutter/material.dart';
-
-import 'models/materi_model.dart';
 
 class MateriService with ChangeNotifier {
   final String idCourse;

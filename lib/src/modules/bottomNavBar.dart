@@ -39,8 +39,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
           children: <Widget>[
             //home page
             HomeAndroid(),
-            SearchAndroid(),
-            MyCourseAndroid(),
             WishlistAndroid(),
             AccountAndroid(),
           ],
@@ -63,18 +61,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
               'Home',
               style: TextStyle(color: Color(0xFFFB1002)),
             ),
-            activeColor: Color(0xFFFB1002),
-          ),
-          BottomNavyBarItem(
-            inactiveColor: Colors.black26,
-            icon: Icon(Icons.search),
-            title: Text('Search'),
-            activeColor: Color(0xFFFB1002),
-          ),
-          BottomNavyBarItem(
-            inactiveColor: Colors.black26,
-            icon: Icon(Icons.apps),
-            title: Text('Kelasku'),
             activeColor: Color(0xFFFB1002),
           ),
           BottomNavyBarItem(

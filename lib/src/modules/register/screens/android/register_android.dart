@@ -1,11 +1,9 @@
-import 'package:byneetcourseapp/src/modules/login/login_service.dart';
+import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
-import 'package:byneetcourseapp/src/tools/fadeAnimation.dart';
 import 'package:byneetcourseapp/src/widgets/customButton_widget.dart';
+import 'package:byneetcourseapp/src/widgets/customFadeAnimation_widget.dart';
 import 'package:byneetcourseapp/src/widgets/customTextfield_widget.dart';
-import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
-import 'package:byneetcourseapp/src/modules/register/widgets/textfield_widget.dart';
 import 'package:provider/provider.dart';
 
 class RegisterAndroid extends StatefulWidget {
@@ -78,7 +76,7 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(height: 20),
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.0,
                     Text(
                       "Sign Up",
@@ -88,7 +86,7 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                       ),
                     ),
                   ),
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.1,
                     Text(
                       "Daftarkan dirimu, banyak kelas-kelas terbaik yang bisa kamu pelajari",
@@ -100,7 +98,7 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                   ),
                   SizedBox(height: 28),
                   //textformfield email
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.3,
                     CustomTextFieldWidget(
                       isEmail: true,
@@ -112,7 +110,7 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.4,
                     CustomTextFieldWidget(
                       isEmail: false,
@@ -125,7 +123,7 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                   ),
 
                   SizedBox(height: 20),
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.5,
                     CustomTextFieldWidget(
                       isEmail: false,
@@ -139,7 +137,7 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                   SizedBox(height: 20),
                   //textformfield password
                   //mau di buat widget tapi bingung karne ad focusNode :D
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.6,
                     TextFormField(
                       obscureText: true,
@@ -175,7 +173,7 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                   SizedBox(height: 20),
                   //textformfield password
                   //mau di buat widget tapi bingung karne ad focusNode :D
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.7,
                     TextFormField(
                       obscureText: true,
@@ -206,7 +204,7 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                   ),
                   SizedBox(height: 50),
                   //tombol login
-                  FadeAnimation(
+                  CustomFadeAnimation(
                     1.8,
                     CustomButtonWidget(
                         onPressed: () async {

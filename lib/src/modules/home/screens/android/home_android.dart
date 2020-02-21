@@ -1,17 +1,19 @@
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:byneetcourseapp/src/modules/course/screens/android/courseGridAll_android.dart';
-import 'package:byneetcourseapp/src/modules/home/home_service.dart';
 import 'package:byneetcourseapp/src/modules/home/models/carousel_model.dart';
-import 'package:byneetcourseapp/src/modules/home/widgets/horizontalListItem_widget.dart';
+import 'package:byneetcourseapp/src/modules/home/services/home_service.dart';
 import 'package:byneetcourseapp/src/modules/loading_container.dart';
-import 'package:byneetcourseapp/src/modules/login/login_service.dart';
+import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
 import 'package:byneetcourseapp/src/modules/nodata_container.dart';
+import 'package:byneetcourseapp/src/modules/search/screens/android/search_android.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
-import 'package:byneetcourseapp/src/tools/fadeAnimation.dart';
-import 'package:clay_containers/widgets/clay_containers.dart';
+import 'package:byneetcourseapp/src/widgets/bouncyPageRoute_widget.dart';
+import 'package:byneetcourseapp/src/widgets/carouselSwiper_widget.dart';
+import 'package:byneetcourseapp/src/widgets/customFadeAnimation_widget.dart';
+import 'package:byneetcourseapp/src/widgets/horizontalListItem_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:byneetcourseapp/src/modules/home/widgets/carouselSwiper_widget.dart';
 import 'package:flutter_advanced_networkimage/provider.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -21,17 +23,13 @@ class HomeAndroid extends StatefulWidget {
 }
 
 class _HomeAndroidState extends State<HomeAndroid>
-    with AutomaticKeepAliveClientMixin<HomeAndroid> {
+    with SingleTickerProviderStateMixin {
   //pull to refresh untuk refresh page
   final _refreshController = RefreshController();
-
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     final user = Provider.of<LoginService>(context);
     return Scaffold(
-      // appBar: AppBar(
-
       body: SmartRefresher(
         controller: _refreshController,
         header: WaterDropMaterialHeader(),
@@ -53,7 +51,7 @@ class _HomeAndroidState extends State<HomeAndroid>
               children: <Widget>[
                 SizedBox(height: 40),
                 // nama + foto profil
-                FadeAnimation(
+                CustomFadeAnimation(
                   1.0,
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 17.0),
@@ -66,85 +64,107 @@ class _HomeAndroidState extends State<HomeAndroid>
                               radius: 25,
                               backgroundColor: Colors.black12,
                               backgroundImage: AdvancedNetworkImage(
-                                user.account.urlImg,
+                                user.account.urlimage,
                                 useDiskCache: true,
                                 cacheRule: CacheRule(maxAge: Duration(days: 7)),
                               ),
                             ),
                             SizedBox(width: 7),
                             Text(
-                              "Hi, ${user.account.nama}",
+                              "Hi,${user.account.name}",
                               style: TextStyle(
                                 fontSize: 25.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
-                        ),
+                        ), // Align(
+                        // AnimatedBuilder(
+                        //   animation: rippleAnimation,
+                        //   builder: (context, child) => Container(
+                        //     width: rippleAnimation.value,
+                        //     height: rippleAnimation.value,
+                        //     child: Container(
+                        //       width: 100,
+                        //       height: 100,
+                        //       decoration: BoxDecoration(
+                        //         shape: BoxShape.circle,
+                        //         color: Colors.amber,
+                        //       ),
+                        //       child: InkWell(
+                        //         onTap: () {
+                        //           scaleController.forward();
+                        //         },
+                        //         child: AnimatedBuilder(
+                        //           animation: scaleAnimation,
+                        //           builder: (context, child) => Transform.scale(
+                        //             scale: scaleAnimation.value,
+                        //             child: Container(
+                        //               margin: EdgeInsets.all(10),
+                        //               decoration: BoxDecoration(
+                        //                   shape: BoxShape.circle,
+                        //                   color: Colors.blue),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+
                         IconButton(
-                            icon: Icon(
-                              Icons.search,
-                              color: CustomColor.textColorPrimary,
-                              size: 30,
-                            ),
-                            onPressed: null)
+                          icon: Icon(Icons.search),
+                          color: CustomColor.textColorPrimary,
+                          iconSize: 30,
+                          onPressed: () {
+                            Navigator.push(context,
+                                BouncyPageRoute(destination: SearchAndroid()));
+                          },
+                        ),
                       ],
                     ),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                //   child: Text(
-                //     "Untuk Kamu",
-                //     style: TextStyle(
-                //       fontSize: 20.0,
-                //       fontWeight: FontWeight.w600,
-                //       color: CustomColor.textColorPrimary,
-                //     ),
-                //   ),
-                // ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 12.0),
                 //Custom Carousel
-                FadeAnimation(
-                  1.2,
-                  Container(
-                    height: 240,
-                    child: FutureBuilder<List<CarouselModel>>(
-                        future: HomeService().getCarouselCollection(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState != ConnectionState.done)
-                            return LoadingContainer();
-                          if (!snapshot.hasData) return NoDataContainer();
-                          return CarouselSwiperWidget(
-                            itemList: snapshot.data, //future nya
-                          );
-                        }),
-                  ),
-                ),
-                SizedBox(height: 15.0),
-                //horizonal item
-                //container list item
-                FadeAnimation(
-                  1.3,
-                  FutureBuilder<List<CourseModel>>(
-                      future: HomeService().getRecomendedCourseCollection(),
+                Container(
+                  height: 240,
+                  child: FutureBuilder<List<CarouselModel>>(
+                      future: HomeService().getCarouselCollection(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState != ConnectionState.done)
                           return LoadingContainer();
-                        if (!snapshot.hasData)
-                          return Center(child: Text('something bad happend.'));
-                        return HorizontalListWidget(
-                            listTitle: "Rekomendasi untuk kamu",
-                            kelasData: snapshot.data, // future
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => CourseGridAll(),
-                                  ));
-                            });
+                        if (!snapshot.hasData) return NoDataContainer();
+                        return CarouselSwiperWidget(
+                          itemList: snapshot.data, //future nya
+                        );
                       }),
                 ),
+
+                SizedBox(height: 15.0),
+                //horizonal item
+                //container list item
+
+                FutureBuilder<List<CourseModel>>(
+                  future: HomeService().getRecomendedCourseCollection(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done)
+                      return LoadingContainer();
+                    if (!snapshot.hasData)
+                      return Center(child: Text('something bad happend.'));
+                    return HorizontalListWidget(
+                        listTitle: "Rekomendasi untuk kamu",
+                        kelasData: snapshot.data, // future
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CourseGridAll(),
+                              ));
+                        });
+                  },
+                ),
+
                 SizedBox(height: 15.0),
                 //horizonal Widget
                 //container list Widget
@@ -160,8 +180,4 @@ class _HomeAndroidState extends State<HomeAndroid>
       ),
     );
   }
-
-  @override
-  // TODOs: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }
