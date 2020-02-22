@@ -1,5 +1,5 @@
 import 'package:byneetcourseapp/dummy/model/screenshot.dart';
-import 'package:byneetcourseapp/dummy/model/theory.dart';
+import 'package:byneetcourseapp/src/modules/course/models/theory_model.dart';
 
 class Kelas {
   final String uid; // id kelas

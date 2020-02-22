@@ -15,4 +15,12 @@ class MateriModel {
         urlvideo: doc.data["urlvideo"],
         txtmateri: doc.data["txtmateri"]);
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "title": title,
+      "utlvideo": urlvideo,
+      "txtmateri": txtmateri,
+    };
+  }
 }

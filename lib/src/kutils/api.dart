@@ -33,17 +33,17 @@ class Api {
   }
 
   //nambah dokument dengan autogenerate key/id
-  Future<DocumentReference> addDocument(Map data) {
+  Future<DocumentReference> addDocument(Map<String, dynamic> data) {
     return ref.add(data);
   }
 
   //buat dokument(set) pakai id/key yg di tentukan
-  Future<void> setDocument(String id, Map data) {
+  Future<void> setDocument(String id, Map<String, dynamic> data) {
     return ref.document(id).setData(data);
   }
 
   //ngupdate dokument berdasarkan id
-  Future<void> updateDocument(String id, Map data) {
+  Future<void> updateDocument(String id, Map<String, dynamic> data) {
     return ref.document(id).updateData(data);
   }
 }

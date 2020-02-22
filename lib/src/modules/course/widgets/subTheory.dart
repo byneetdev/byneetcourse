@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class SubTheoryWidget extends StatelessWidget {
   final String title;
-  bool isComplete = false;
+  final bool isComplete;
   final Function onTap;
   SubTheoryWidget({
     @required this.title,
-    this.isComplete,
+    this.isComplete: false,
     @required this.onTap,
   });
   @override

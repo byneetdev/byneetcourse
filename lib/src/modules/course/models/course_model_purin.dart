@@ -12,6 +12,7 @@ class CourseModel {
   final int rating; // rating kelas
   final String date; // tanggal dibuat kelas
   final List<String> screenshots; // list gambar screenshot
+  final List<Theory> progress;
 
   CourseModel({
     this.title,
@@ -24,6 +25,7 @@ class CourseModel {
     this.date,
     this.rating,
     this.screenshots,
+    this.progress,
   });
 
   factory CourseModel.fromFirestore(DocumentSnapshot doc) => CourseModel(
@@ -35,9 +37,13 @@ class CourseModel {
       creatorName: doc.data["creatorName"],
       screenshots:
           (doc.data["screenshot"] as List).map((e) => e.toString()).toList(),
-      theories: (doc.data["theories"] as List)
-          .map((e) => Theory.fromMap(e))
-          .toList());
+      theories:
+          (doc.data["theories"] as List).map((e) => Theory.fromMap(e)).toList(),
+      progress: doc.data["progress"] == null
+          ? null
+          : (doc.data["progress"] as List)
+              .map((e) => Theory.fromMap(e))
+              .toList());
 
   Map<String, dynamic> toMap() {
     return {
