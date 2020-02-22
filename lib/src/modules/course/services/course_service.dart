@@ -1,7 +1,6 @@
-import 'package:byneetcourseapp/src/kutils/api.dart';
+import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
+import 'package:byneetcourseapp/src/utils/api.dart';
 import 'package:flutter/material.dart';
-
-import 'models/course_model_purin.dart';
 
 class CourseService with ChangeNotifier {
   final _api = Api('courses');

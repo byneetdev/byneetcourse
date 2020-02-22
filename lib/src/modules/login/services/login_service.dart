@@ -37,6 +37,7 @@ class LoginService with ChangeNotifier {
         }).then((_) => AccountService()
             .getDocumentById(value.user.uid)
             .then((value) => _account = value));
+
         notifyListeners();
       });
       return true;

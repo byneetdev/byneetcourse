@@ -1,6 +1,6 @@
 import 'package:byneetcourseapp/src/modules/course/screens/android/photoview_android.dart';
+import 'package:byneetcourseapp/src/widgets/customImage_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:byneetcourseapp/src/modules/course/widgets/customImage_widget.dart';
 
 class ScreenshotWidget extends StatelessWidget {
   final List<String> screenshot;

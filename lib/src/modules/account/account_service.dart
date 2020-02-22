@@ -1,4 +1,4 @@
-import 'package:byneetcourseapp/src/kutils/api.dart';
+import 'package:byneetcourseapp/src/utils/api.dart';
 import 'package:byneetcourseapp/src/modules/account/models/account_model_purin.dart';
 import 'package:flutter/cupertino.dart';
 

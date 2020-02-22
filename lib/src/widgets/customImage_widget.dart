@@ -14,15 +14,16 @@ class CustomImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: (heroTag != null)
-          ? Hero(tag: heroTag, child: _imageWidget())
-          : _imageWidget(),
+          ? Hero(tag: heroTag, child: _imageWidget(context))
+          : _imageWidget(context),
     );
   }
 
-  Widget _imageWidget() {
+  Widget _imageWidget(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(15.0),
         child: TransitionToImage(
           image: AdvancedNetworkImage(
             urlimage,
