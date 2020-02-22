@@ -1,7 +1,7 @@
 import 'package:byneetcourseapp/src/modules/course/models/theory_model.dart';
-import 'package:clay_containers/widgets/clay_containers.dart';
+import 'package:byneetcourseapp/src/modules/course/screens/android/modulDrawerItems.dart';
+import 'package:byneetcourseapp/src/widgets/bouncyPageRoute_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:byneetcourseapp/src/modules/course/screens/android/theoryDetail_android.dart';
 
 class TheoryWidget extends StatelessWidget {
   final List<Theory> theory;
@@ -31,11 +31,12 @@ class EntryItem extends StatelessWidget {
         right: 8.0,
         bottom: 10,
       ),
-      child: ClayContainer(
-        color: Color(0xFFD2E0EF),
-        borderRadius: 15,
+      child: Card(
+        elevation: 8,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
         child: ExpansionTile(
-          backgroundColor: Color(0xFFD2E0EF),
           key: PageStorageKey<Theory>(root),
           title: Text(
             root.title,
@@ -49,13 +50,16 @@ class EntryItem extends StatelessWidget {
             return ListTile(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TheoryDetailAndroid(),
-                    ));
+                    context, BouncyPageRoute(destination: ModulDrawerItem()));
               },
               leading: Icon(Icons.lock),
-              title: Text(e.title),
+              title: Text(
+                e.title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             );
           }).toList(),
         ),

@@ -1,6 +1,5 @@
 import 'package:byneetcourseapp/src/tools/constColor.dart';
 import 'package:byneetcourseapp/src/widgets/customFadeAnimation_widget.dart';
-import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 
 class SearchAndroid extends StatelessWidget {

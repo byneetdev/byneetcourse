@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BouncyPageRoute extends PageRouteBuilder {
   final Widget destination;
 
-  BouncyPageRoute({this.destination})
+  BouncyPageRoute({@required this.destination})
       : super(
           transitionDuration: Duration(milliseconds: 1000),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {

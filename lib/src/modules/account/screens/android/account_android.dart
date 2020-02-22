@@ -1,4 +1,3 @@
-import 'package:byneetcourseapp/src/modules/account/widgets/account_widget.dart';
 import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
 import 'package:byneetcourseapp/src/widgets/cardCourseProgress_widget.dart';

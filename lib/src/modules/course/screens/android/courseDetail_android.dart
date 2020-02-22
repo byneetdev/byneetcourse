@@ -6,7 +6,6 @@ import 'package:byneetcourseapp/src/modules/wishlist/wishlist_service.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
 import 'package:byneetcourseapp/src/widgets/customFadeAnimation_widget.dart';
 import 'package:byneetcourseapp/src/widgets/customImage_widget.dart';
-import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,9 +36,15 @@ class CourseDetailAndroid extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: IconButton(
-                icon: Icon(
-                  Icons.bookmark_border,
+                icon: IconButton(
+                  icon: Icon(Icons.bookmark_border),
                   color: CustomColor.textColorPrimary,
+                  onPressed: () {
+                    WishListService(user.user.uid).setWishlist(kelas).then((_) {
+                      _key.currentState.showSnackBar(
+                          SnackBar(content: Text("Disimpan di Wishlist!")));
+                    });
+                  },
                 ),
                 onPressed: null,
                 iconSize: 30,
