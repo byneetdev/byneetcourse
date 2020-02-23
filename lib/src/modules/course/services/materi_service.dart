@@ -1,4 +1,3 @@
-import 'package:byneetcourseapp/src/modules/course/models/theory_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:byneetcourseapp/src/modules/course/models/materi_model.dart';
@@ -7,7 +6,7 @@ import 'package:byneetcourseapp/src/utils/api.dart';
 class MateriService with ChangeNotifier {
   final String idCourse;
   Api _api;
-  Api _courseref = new Api("courses");
+  // Api _courseref = new Api("courses");
   MateriService(this.idCourse) {
     _api = Api('courses/$idCourse/materis');
   }
@@ -16,12 +15,12 @@ class MateriService with ChangeNotifier {
   List<MateriModel> listMateri;
   MateriModel materiDetail;
 
-  Future<void> addDocumentAndUpdateToTheories(
-      MateriModel data, List<Theory> theories) async {
-    await _api.addDocument(data.toMap()).then(
-        (doc) => _courseref.updateDocument(idCourse, {"theories": theories}));
-    return;
-  }
+  // Future<void> addDocumentAndUpdateToTheories(
+  //     MateriModel data, List<Theory> theories) async {
+  //   await _api.addDocument(data.toMap()).then(
+  //       (doc) => _courseref.updateDocument(idCourse, {"theories": theories}));
+  //   return;
+  // }
 
   //get all materi, dak gune,.. tuk admin jak nanti
   Future<List<MateriModel>> getDataCollection() async {
