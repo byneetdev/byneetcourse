@@ -1,9 +1,14 @@
+import 'package:byneetcourseapp/src/modules/account/mycourse_repository.dart';
+import 'package:byneetcourseapp/src/modules/account/mycourse_service.dart';
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
+import 'package:byneetcourseapp/src/modules/course/screens/android/loading_module.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/screenshot_widget.dart';
 import 'package:byneetcourseapp/src/modules/course/widgets/theory_widget.dart';
 import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
+import 'package:byneetcourseapp/src/modules/wishlist/wishlist_repository.dart';
 import 'package:byneetcourseapp/src/modules/wishlist/wishlist_service.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
+import 'package:byneetcourseapp/src/widgets/bouncyPageRoute_widget.dart';
 import 'package:byneetcourseapp/src/widgets/customFadeAnimation_widget.dart';
 import 'package:byneetcourseapp/src/widgets/customImage_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +23,18 @@ class CourseDetailAndroid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<LoginService>(context);
+    final wishlist = Provider.of<WishListRepository>(context);
+    final mycourse = Provider.of<MyCourseRepository>(context);
+    //ngecek mun dah ade di wishlist, tuk dipakai di ikon biar jadi merah/putih
+    bool isInList = wishlist?.wishlist?.singleWhere(
+            (element) => element.uid == kelas.uid,
+            orElse: () => null) !=
+        null;
+    bool isInMycourse = mycourse?.listMycourse?.singleWhere(
+            (element) => element.uid == kelas.uid,
+            orElse: () => null) !=
+        null;
+    print(kelas.uid);
 
     return SafeArea(
       child: Scaffold(
@@ -36,17 +53,26 @@ class CourseDetailAndroid extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: IconButton(
-                icon: IconButton(
-                  icon: Icon(Icons.bookmark_border),
-                  color: CustomColor.textColorPrimary,
-                  onPressed: () {
-                    WishListService(user.user.uid).setWishlist(kelas).then((_) {
-                      _key.currentState.showSnackBar(
-                          SnackBar(content: Text("Disimpan di Wishlist!")));
-                    });
-                  },
-                ),
-                onPressed: null,
+                icon: isInList
+                    ? Icon(
+                        Icons.bookmark,
+                        color: Colors.red,
+                      )
+                    : Icon(
+                        Icons.bookmark_border,
+                      ),
+                color: CustomColor.textColorPrimary,
+                onPressed: () {
+                  WishListService(user.user.uid)
+                      .setWishlist(kelas, isInList)
+                      .then((_) {
+                    _key.currentState.showSnackBar(SnackBar(
+                        content: Text(isInList
+                            ? "Dihapus dari Wishlist!"
+                            : "Disimpan di Wishlist!")));
+                    wishlist.refreshRepository(user.user.uid);
+                  });
+                },
                 iconSize: 30,
               ),
             )
@@ -255,9 +281,54 @@ class CourseDetailAndroid extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
+          onPressed: () async {
+            if (isInMycourse) {
+              //ngecek mun dah daftar course, langsung ke materi
+              Navigator.push(
+                  context,
+                  BouncyPageRoute(
+                      destination: LoadingModule(
+                    idCourse: kelas.uid,
+                  )));
+            } else {
+              await MycourseService(user.user.uid)
+                  .setDocument(kelas)
+                  .then((_) async {
+                mycourse.getData(user.user.uid);
+                return showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                          title: Text('Berhasil Daftar!'),
+                          content: Image.asset('images/menhera.jpg'),
+                          actions: <Widget>[
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  'Close',
+                                  style: TextStyle(color: Colors.red),
+                                )),
+                            FlatButton(
+                                onPressed: () {
+                                  // Provider.of<MateriRepository>(context,
+                                  //         listen: false)
+                                  //     .getData(kelas.uid);
+                                  Navigator.push(
+                                      context,
+                                      BouncyPageRoute(
+                                          destination: LoadingModule(
+                                        idCourse: kelas.uid,
+                                      )));
+                                },
+                                child: Text('Lanjut Belajar!')),
+                          ],
+                        ));
+              });
+            }
+          },
           label: Text(
-            "Daftar",
+            isInMycourse ? "Lanjut Belajar" : "Daftar",
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
