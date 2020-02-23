@@ -1,4 +1,8 @@
+import 'package:byneetcourseapp/src/modules/account/mycourse_repository.dart';
+import 'package:byneetcourseapp/src/modules/course/models/materi_model.dart';
+import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HiddenDrawerController {
   HiddenDrawerController({this.items, @required DrawerContent initialPage}) {
@@ -18,21 +22,29 @@ class DrawerContent extends StatefulWidget {
 }
 
 class DrawerItem extends StatelessWidget {
-  DrawerItem({this.onPressed, this.icon, this.text, this.page});
+  DrawerItem({this.onPressed, this.icon, this.text, this.page, this.materi});
   Function onPressed;
-  Widget icon;
-  Widget text;
+  final Widget icon;
+  final Widget text;
+  final DrawerContent page;
 
-  DrawerContent page;
+  final MateriModel materi;
 
   @override
   Widget build(BuildContext context) {
+    final mycourse = Provider.of<MyCourseRepository>(context);
+    final user = Provider.of<LoginService>(context);
+    print(materi.id);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 2),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: onPressed,
+          onTap: () {
+            mycourse.updateProgressDone(
+                user.user.uid, mycourse.myCourse.uid, materi.id);
+            onPressed();
+          },
           child: Card(
             elevation: 7,
             margin: EdgeInsets.only(left: 14, bottom: 10),
@@ -44,10 +56,19 @@ class DrawerItem extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(left: 16, right: 8),
-                    child: icon,
+                    child: Icon(
+                        mycourse.isDone(materi.id)
+                            ? Icons.done
+                            : Icons.play_arrow,
+                        color: Colors.green),
                   ),
                   Expanded(
-                    child: text,
+                    child: Text(
+                      materi.title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: TextStyle(color: Colors.black),
+                    ),
                   )
                 ],
               ),
@@ -101,12 +122,16 @@ class _HiddenDrawerState extends State<HiddenDrawer>
 
   drawerItems() {
     return widget.controller.items.map((DrawerItem item) {
-      if (item.onPressed == null) {
-        item.onPressed = () {
-          widget.controller.page = item.page;
-          widget.controller.close();
-        };
-      }
+      // if (item.onPressed == null) {
+      //   item.onPressed = () {
+      //     widget.controller.page = item.page;
+      //     widget.controller.close();
+      //   };
+      // }
+      item.onPressed = () {
+        widget.controller.page = item.page;
+        widget.controller.close();
+      };
       item.page.onMenuPressed = menuPress;
       return item;
     }).toList();
