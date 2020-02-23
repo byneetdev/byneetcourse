@@ -1,9 +1,10 @@
+import 'package:byneetcourseapp/src/modules/course/models/materi_model.dart';
 import 'package:byneetcourseapp/src/widgets/customDrawer.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends DrawerContent {
-  final String title;
-  MainPage({Key key, this.title});
+  final MateriModel materi;
+  MainPage({Key key, this.materi});
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -11,6 +12,7 @@ class MainPage extends DrawerContent {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
+    // final materiprov = Provider.of<MateriRepository>(context);
     return SafeArea(
       child: Center(
         child: Column(
@@ -40,7 +42,7 @@ class _MainPageState extends State<MainPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(widget.title),
+                  Text(widget.materi.title),
                 ],
               ),
             ),

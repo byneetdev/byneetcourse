@@ -1,10 +1,14 @@
+import 'package:byneetcourseapp/src/modules/account/mycourse_repository.dart';
+import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
+import 'package:byneetcourseapp/src/modules/course/models/materi_model.dart';
 import 'package:byneetcourseapp/src/modules/course/screens/android/modulDetail_android.dart';
 import 'package:byneetcourseapp/src/widgets/customDrawer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ModulDrawerItem extends StatefulWidget {
-  ModulDrawerItem({Key key, this.title}) : super(key: key);
-  final String title;
+  ModulDrawerItem({Key key, this.listMateri}) : super(key: key);
+  final List<MateriModel> listMateri;
 
   @override
   _ModulDrawerItemState createState() => _ModulDrawerItemState();
@@ -13,129 +17,42 @@ class ModulDrawerItem extends StatefulWidget {
 class _ModulDrawerItemState extends State<ModulDrawerItem>
     with TickerProviderStateMixin {
   HiddenDrawerController _drawerController;
+  CourseModel mycourse;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    var mycourse = Provider.of<MyCourseRepository>(context).myCourse;
+    if (mycourse != this.mycourse) {
+      this.mycourse = mycourse;
+      print(mycourse.toMap().toString());
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+
     _drawerController = HiddenDrawerController(
       // initial page tuk opening jadi misal user ke modul buka ini am pertameny t
       initialPage: MainPage(
-        title: 'main',
+        //nampilkan materi yang terakhir dibuka, mun baru, buka materi index ke-0
+        materi: widget.listMateri.singleWhere(
+            (element) => element.id == mycourse?.progress?.elementAt(-1),
+            orElse: () => widget.listMateri[0]),
       ),
       // ini dikasi map jak bs mah kali ye.. jadi kau ngurus ini jam
-      items: [
-        DrawerItem(
-          //Judul Modul
-          text: Text(
-            'Introduction',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(color: Colors.black),
-          ),
-          //Icon kondisi isComplete ? Icon(Icons.done) : Icon(Icons.play)
-          icon: Icon(Icons.done, color: Colors.green),
-          //PAGE untuk navigator ke UI baru
-          page: MainPage(
-            title: 'Introduction',
-          ),
-        ),
-        DrawerItem(
-          text: Text(
-            'Build Calculator Apps lakad matataaanng',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(color: Colors.black, fontSize: 14.0),
-          ),
-          icon: Icon(Icons.play_arrow, color: Colors.green),
-          page: MainPage(
-            title: 'Build Calculator Apps',
-          ),
-        ),
-        DrawerItem(
-          text: Text(
-            'Build Calculator Apps lakad matataaanng',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(color: Colors.black, fontSize: 14.0),
-          ),
-          icon: Icon(Icons.play_arrow, color: Colors.green),
-          page: MainPage(
-            title: 'Build Calculator Apps',
-          ),
-        ),
-        DrawerItem(
-          text: Text(
-            'Build Calculator Apps lakad matataaanng',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(color: Colors.black, fontSize: 14.0),
-          ),
-          icon: Icon(Icons.play_arrow, color: Colors.green),
-          page: MainPage(
-            title: 'Build Calculator Apps',
-          ),
-        ),
-        DrawerItem(
-          text: Text(
-            'Build Calculator Apps lakad matataaanng',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(color: Colors.black, fontSize: 14.0),
-          ),
-          icon: Icon(Icons.play_arrow, color: Colors.green),
-          page: MainPage(
-            title: 'Build Calculator Apps',
-          ),
-        ),
-        DrawerItem(
-          text: Text(
-            'Build Calculator Apps lakad matataaanng',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(color: Colors.black, fontSize: 14.0),
-          ),
-          icon: Icon(Icons.play_arrow, color: Colors.green),
-          page: MainPage(
-            title: 'Build Calculator Apps',
-          ),
-        ),
-        DrawerItem(
-          text: Text(
-            'Build Calculator Apps lakad matataaanng',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(color: Colors.black, fontSize: 14.0),
-          ),
-          icon: Icon(Icons.play_arrow, color: Colors.green),
-          page: MainPage(
-            title: 'Build Calculator Apps',
-          ),
-        ),
-        DrawerItem(
-          text: Text(
-            'Build Calculator Apps lakad matataaanng',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(color: Colors.black, fontSize: 14.0),
-          ),
-          icon: Icon(Icons.play_arrow, color: Colors.green),
-          page: MainPage(
-            title: 'Build Calculator Apps',
-          ),
-        ),
-        DrawerItem(
-          text: Text(
-            'Build Calculator Apps lakad matataaanng',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(color: Colors.black, fontSize: 14.0),
-          ),
-          icon: Icon(Icons.play_arrow, color: Colors.green),
-          page: MainPage(
-            title: 'Build Calculator Apps',
-          ),
-        ),
-      ],
+      items: widget.listMateri
+          .map(
+            (e) => DrawerItem(
+              materi: e,
+              //PAGE untuk navigator ke UI baru
+              page: MainPage(
+                materi: e,
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 
