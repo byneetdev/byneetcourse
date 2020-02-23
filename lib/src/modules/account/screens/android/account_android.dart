@@ -1,6 +1,8 @@
+import 'package:byneetcourseapp/src/modules/account/mycourse_repository.dart';
+import 'package:byneetcourseapp/src/modules/account/widgets/listmycourse_widget.dart';
 import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
+import 'package:byneetcourseapp/src/modules/nodata_container.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
-import 'package:byneetcourseapp/src/widgets/cardCourseProgress_widget.dart';
 import 'package:byneetcourseapp/src/widgets/customFadeAnimation_widget.dart';
 import 'package:byneetcourseapp/src/widgets/customImage_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ class AccountAndroid extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     final user = Provider.of<LoginService>(context);
+    final myCourse = Provider.of<MyCourseRepository>(context);
     return Scaffold(
       body: Container(
         child: SingleChildScrollView(
@@ -40,7 +43,7 @@ class AccountAndroid extends StatelessWidget {
                         SizedBox(
                           width: 140,
                           child: CustomImageWidget(
-                              heroTag: user.account.id,
+                              heroTag: user.user.uid,
                               urlimage: user.account.urlimage),
                         ),
                       ),
@@ -111,24 +114,9 @@ class AccountAndroid extends StatelessWidget {
               SizedBox(height: 15),
               //tuk sementare gini jak lok
               //nanti kalo class udah work baru colok widget ini
-              CustomFadeAnimation(
-                1.5,
-                CardCourseProgressWidget(
-                  title: "Flutter Full-Course from Beginner to Advance",
-                  urlimage:
-                      "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/98987.png?alt=media&token=8e0bef42-c551-4baa-8696-7de6a720bd43",
-                ),
-              ),
-              SizedBox(height: 15),
-              CustomFadeAnimation(
-                1.6,
-                CardCourseProgressWidget(
-                  title: "Phyton Masterclass Guide for Expert",
-                  urlimage:
-                      "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/98987.png?alt=media&token=8e0bef42-c551-4baa-8696-7de6a720bd43",
-                ),
-              ),
-              SizedBox(height: 15),
+              (myCourse.listMycourse == null)
+                  ? NoDataContainer()
+                  : ListMyCourseWidget(listMycourse: myCourse.listMycourse),
             ],
           ),
         ),
