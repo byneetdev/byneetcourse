@@ -1,6 +1,4 @@
 import 'package:byneetcourseapp/src/modules/course/models/theory_model.dart';
-import 'package:byneetcourseapp/src/modules/course/screens/android/modulDrawerItems.dart';
-import 'package:byneetcourseapp/src/widgets/bouncyPageRoute_widget.dart';
 import 'package:flutter/material.dart';
 
 class TheoryWidget extends StatelessWidget {
@@ -49,8 +47,8 @@ class EntryItem extends StatelessWidget {
           children: root.items.map((e) {
             return ListTile(
               onTap: () {
-                Navigator.push(
-                    context, BouncyPageRoute(destination: ModulDrawerItem()));
+                // Navigator.push(
+                //     context, BouncyPageRoute(destination: ModulDrawerItem()));
               },
               leading: Icon(Icons.lock),
               title: Text(
