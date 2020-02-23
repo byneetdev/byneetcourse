@@ -12,21 +12,23 @@ class CourseModel {
   final int rating; // rating kelas
   final String date; // tanggal dibuat kelas
   final List<String> screenshots; // list gambar screenshot
-  final List<Theory> progress;
+  final List<String> progress; //list idmateri yg udah
+  final int
+      totalmateri; //total materi tuk ngitung perenan progress, biar dak perlu get get list materi agik
 
-  CourseModel({
-    this.title,
-    this.urlimage,
-    this.description,
-    this.theories,
-    this.uid,
-    this.classStatus,
-    this.creatorName,
-    this.date,
-    this.rating,
-    this.screenshots,
-    this.progress,
-  });
+  CourseModel(
+      {this.title,
+      this.urlimage,
+      this.description,
+      this.theories,
+      this.uid,
+      this.classStatus,
+      this.creatorName,
+      this.date,
+      this.rating,
+      this.screenshots,
+      this.progress,
+      this.totalmateri});
 
   factory CourseModel.fromFirestore(DocumentSnapshot doc) => CourseModel(
       uid: doc.documentID,
@@ -36,14 +38,13 @@ class CourseModel {
       classStatus: doc.data["status"],
       creatorName: doc.data["creatorName"],
       screenshots:
-          (doc.data["screenshot"] as List).map((e) => e.toString()).toList(),
-      theories:
-          (doc.data["theories"] as List).map((e) => Theory.fromMap(e)).toList(),
-      progress: doc.data["progress"] == null
-          ? null
-          : (doc.data["progress"] as List)
-              .map((e) => Theory.fromMap(e))
-              .toList());
+          (doc.data["screenshot"] as List)?.map((e) => e.toString())?.toList(),
+      theories: (doc.data["theories"] as List)
+          ?.map((e) => Theory.fromMap(e))
+          ?.toList(),
+      progress:
+          (doc.data["progress"] as List)?.map((e) => e.toString())?.toList(),
+      totalmateri: doc.data['totalmateri']);
 
   Map<String, dynamic> toMap() {
     return {
@@ -53,7 +54,9 @@ class CourseModel {
       "screenshot": screenshots,
       "status": classStatus,
       "creatorName": creatorName,
-      "theories": theories.map((e) => e.toMap()).toList()
+      "theories": theories.map((e) => e.toMap())?.toList(),
+      "progress": progress,
+      "totalmateri": totalmateri
     };
   }
 }

@@ -29,7 +29,7 @@ class ItemModel {
   factory ItemModel.fromMap(Map data) {
     return ItemModel(
       title: data["title"],
-      idmateri: data['idamateri'],
+      idmateri: data['idmateri'],
       isdone: data["isdone"] ?? false,
     );
   }
