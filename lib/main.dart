@@ -1,4 +1,7 @@
+import 'package:byneetcourseapp/src/modules/account/mycourse_repository.dart';
+import 'package:byneetcourseapp/src/modules/course/services/materi_repository.dart';
 import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
+import 'package:byneetcourseapp/src/modules/wishlist/wishlist_repository.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => LoginService.instance())
+        ChangeNotifierProvider(create: (context) => LoginService.instance()),
+        ChangeNotifierProvider(create: (context) => WishListRepository()),
+        ChangeNotifierProvider(create: (context) => MateriRepository()),
+        ChangeNotifierProvider(create: (context) => MyCourseRepository()),
       ],
       child: MaterialApp(
         title: 'Byneet Course',
