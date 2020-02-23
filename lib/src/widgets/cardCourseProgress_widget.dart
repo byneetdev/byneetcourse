@@ -1,11 +1,11 @@
+import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
 import 'package:byneetcourseapp/src/widgets/customImage_widget.dart';
 import 'package:flutter/material.dart';
 
 class CardCourseProgressWidget extends StatelessWidget {
-  final String urlimage;
-  final String title;
-  CardCourseProgressWidget({this.urlimage, this.title});
+  final CourseModel mycourse;
+  CardCourseProgressWidget({this.mycourse});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,8 +22,8 @@ class CardCourseProgressWidget extends StatelessWidget {
               width: 100,
               height: 100,
               child: CustomImageWidget(
-                heroTag: "null",
-                urlimage: urlimage,
+                heroTag: mycourse.uid,
+                urlimage: mycourse.urlimage,
               ),
             ),
             SizedBox(width: 15),
@@ -35,7 +35,7 @@ class CardCourseProgressWidget extends StatelessWidget {
                 children: <Widget>[
                   SizedBox(height: 10),
                   Text(
-                    title,
+                    mycourse.title,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: TextStyle(

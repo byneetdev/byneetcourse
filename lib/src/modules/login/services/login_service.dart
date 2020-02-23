@@ -102,9 +102,9 @@ class LoginService with ChangeNotifier {
         "nama": user.displayName,
         "urlImg":
             "https://firebasestorage.googleapis.com/v0/b/byneet-course.appspot.com/o/98987.png?alt=media&token=8e0bef42-c551-4baa-8696-7de6a720bd43"
-      }).then((value) {
+      }).then((value) async {
         _account = value;
-
+        print('login sukses');
         _status = Status.Authenticated;
       });
     }
