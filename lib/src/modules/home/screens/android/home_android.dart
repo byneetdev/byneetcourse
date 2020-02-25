@@ -28,152 +28,116 @@ class _HomeAndroidState extends State<HomeAndroid>
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<LoginService>(context);
-    return Scaffold(
-      body: SmartRefresher(
-        controller: _refreshController,
-        header: WaterDropMaterialHeader(),
-        onRefresh: () async {
-          try {
-            await Future.delayed(Duration(milliseconds: 1000));
-            if (mounted) {
-              setState(() {});
-            }
-            _refreshController.refreshCompleted();
-          } catch (e) {
-            _refreshController.refreshFailed();
+    return SmartRefresher(
+      controller: _refreshController,
+      header: WaterDropMaterialHeader(),
+      onRefresh: () async {
+        try {
+          await Future.delayed(Duration(milliseconds: 1000));
+          if (mounted) {
+            setState(() {});
           }
-        },
-        child: Container(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 40),
-                // nama + foto profil
-                CustomFadeAnimation(
-                  1.0,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 17.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundColor: Colors.black12,
-                              backgroundImage: AdvancedNetworkImage(
-                                user.account.urlimage,
-                                useDiskCache: true,
-                                cacheRule: CacheRule(maxAge: Duration(days: 7)),
-                              ),
+          _refreshController.refreshCompleted();
+        } catch (e) {
+          _refreshController.refreshFailed();
+        }
+      },
+      child: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: 40),
+              // nama + foto profil
+              CustomFadeAnimation(
+                1.0,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          CircleAvatar(
+                            radius: 25,
+                            backgroundColor: Colors.black12,
+                            backgroundImage: AdvancedNetworkImage(
+                              user.account.urlimage,
+                              useDiskCache: true,
+                              cacheRule: CacheRule(maxAge: Duration(days: 7)),
                             ),
-                            SizedBox(width: 7),
-                            Text(
-                              "Hi,${user.account.name}",
-                              style: TextStyle(
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          ),
+                          SizedBox(width: 7),
+                          Text(
+                            "Hi,${user.account.name}",
+                            style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
-                        ), // Align(
-                        // AnimatedBuilder(
-                        //   animation: rippleAnimation,
-                        //   builder: (context, child) => Container(
-                        //     width: rippleAnimation.value,
-                        //     height: rippleAnimation.value,
-                        //     child: Container(
-                        //       width: 100,
-                        //       height: 100,
-                        //       decoration: BoxDecoration(
-                        //         shape: BoxShape.circle,
-                        //         color: Colors.amber,
-                        //       ),
-                        //       child: InkWell(
-                        //         onTap: () {
-                        //           scaleController.forward();
-                        //         },
-                        //         child: AnimatedBuilder(
-                        //           animation: scaleAnimation,
-                        //           builder: (context, child) => Transform.scale(
-                        //             scale: scaleAnimation.value,
-                        //             child: Container(
-                        //               margin: EdgeInsets.all(10),
-                        //               decoration: BoxDecoration(
-                        //                   shape: BoxShape.circle,
-                        //                   color: Colors.blue),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-
-                        IconButton(
-                          icon: Icon(Icons.search),
-                          color: CustomColor.textColorPrimary,
-                          iconSize: 30,
-                          onPressed: () {
-                            Navigator.push(context,
-                                BouncyPageRoute(destination: SearchAndroid()));
-                          },
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.search),
+                        color: CustomColor.textColorPrimary,
+                        iconSize: 30,
+                        onPressed: () {
+                          Navigator.push(context,
+                              BouncyPageRoute(destination: SearchAndroid()));
+                        },
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 12.0),
-                //Custom Carousel
-                Container(
-                  height: 240,
-                  child: FutureBuilder<List<CarouselModel>>(
-                      future: HomeService().getCarouselCollection(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState != ConnectionState.done)
-                          return LoadingContainer();
-                        if (!snapshot.hasData) return NoDataContainer();
-                        return CarouselSwiperWidget(
-                          itemList: snapshot.data, //future nya
-                        );
-                      }),
-                ),
+              ),
+              SizedBox(height: 12.0),
+              //Custom Carousel
+              Container(
+                height: 240,
+                child: FutureBuilder<List<CarouselModel>>(
+                    future: HomeService().getCarouselCollection(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done)
+                        return LoadingContainer();
+                      if (!snapshot.hasData) return NoDataContainer();
+                      return CarouselSwiperWidget(
+                        itemList: snapshot.data, //future nya
+                      );
+                    }),
+              ),
 
-                SizedBox(height: 15.0),
-                //horizonal item
-                //container list item
+              SizedBox(height: 15.0),
+              //horizonal item
+              //container list item
+              FutureBuilder<List<CourseModel>>(
+                future: HomeService().getRecomendedCourseCollection(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done)
+                    return LoadingContainer();
+                  if (!snapshot.hasData)
+                    return Center(child: Text('something bad happend.'));
+                  return HorizontalListWidget(
+                      listTitle: "Rekomendasi untuk kamu",
+                      kelasData: snapshot.data, // future
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CourseGridAll(),
+                            ));
+                      });
+                },
+              ),
 
-                FutureBuilder<List<CourseModel>>(
-                  future: HomeService().getRecomendedCourseCollection(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done)
-                      return LoadingContainer();
-                    if (!snapshot.hasData)
-                      return Center(child: Text('something bad happend.'));
-                    return HorizontalListWidget(
-                        listTitle: "Rekomendasi untuk kamu",
-                        kelasData: snapshot.data, // future
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CourseGridAll(),
-                              ));
-                        });
-                  },
-                ),
-
-                SizedBox(height: 15.0),
-                //horizonal Widget
-                //container list Widget
-                // HorizontalListWidget(
-                //   listTitle: "Best Seller",
-                //   kelasData: dummyKelas, //future nya
-                // ),
-                SizedBox(height: 100)
-              ],
-            ),
+              SizedBox(height: 15.0),
+              //horizonal Widget
+              //container list Widget
+              // HorizontalListWidget(
+              //   listTitle: "Best Seller",
+              //   kelasData: dummyKelas, //future nya
+              // ),
+              SizedBox(height: 100)
+            ],
           ),
         ),
       ),
