@@ -123,6 +123,22 @@ class CourseDetailAndroid extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(14.0),
                         child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius:
+                                    10.0, // has the effect of softening the shadow
+                                spreadRadius:
+                                    2.0, // has the effect of extending the shadow
+                                offset: Offset(
+                                  2.0, // horizontal, move right 2
+                                  2.0, // vertical, move down 2
+                                ),
+                              )
+                            ],
+                          ),
                           child: AspectRatio(
                             aspectRatio: 4.5 / 3.0, //? tuk ukuran gambar
                             child: CustomImageWidget(
