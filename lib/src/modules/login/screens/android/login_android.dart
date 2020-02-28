@@ -177,9 +177,7 @@ class _LoginAndroidState extends State<LoginAndroid> {
                                   ));
                         }
                       },
-                      title: (user.status == Status.Authenticating)
-                          ? "Loading..."
-                          : "Log In",
+                      title: "Log In",
                     ),
                   ),
                   SizedBox(height: 16),
