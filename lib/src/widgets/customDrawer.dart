@@ -1,6 +1,5 @@
 import 'package:byneetcourseapp/src/modules/account/mycourse_repository.dart';
 import 'package:byneetcourseapp/src/modules/course/models/materi_model.dart';
-import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +32,7 @@ class DrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mycourse = Provider.of<MyCourseRepository>(context);
-    final user = Provider.of<LoginService>(context);
+    // final user = Provider.of<LoginService>(context);
     print(materi.id);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 2),
@@ -41,8 +40,8 @@ class DrawerItem extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            mycourse.updateProgressDone(
-                user.user.uid, mycourse.myCourse.uid, materi.id);
+            // mycourse.updateProgressDone(
+            //     user.user.uid, mycourse.myCourse.uid, materi.id);
             onPressed();
           },
           child: Card(
