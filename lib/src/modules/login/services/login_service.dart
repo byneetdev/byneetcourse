@@ -12,6 +12,7 @@ class LoginService with ChangeNotifier {
   GoogleSignIn _googleSignIn;
   Status _status = Status.Uninitialized;
   AccountModel _account;
+  String _errorCode;
 
   LoginService.instance()
       : _auth = FirebaseAuth.instance,
@@ -22,13 +23,20 @@ class LoginService with ChangeNotifier {
   Status get status => _status;
   FirebaseUser get user => _user;
   AccountModel get account => _account;
+  String get errorCode => _errorCode;
 
   Future<bool> register(
       String email, String password, String nama, String keahlian) async {
+    List<String> cekcekemail =
+        await _auth.fetchSignInMethodsForEmail(email: email);
+    if (cekcekemail != null && cekcekemail.length > 0) {
+      print(cekcekemail.toString());
+      return false;
+    }
     try {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) {
+          .then((value) async {
         AccountService().setDocument(value.user.uid, {
           "nama": nama,
           "keahlian": keahlian,
@@ -40,6 +48,12 @@ class LoginService with ChangeNotifier {
 
         notifyListeners();
       });
+      //.catchError((onError) {
+      //   print(errorCode);
+      //   // _errorCode = onError.toString();
+      //   // notifyListeners();
+      //   return false;
+      // }, test: (bol) => false);
       return true;
     } catch (e) {
       print(e);
