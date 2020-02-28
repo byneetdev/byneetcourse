@@ -23,10 +23,11 @@ class MyCourseRepository with ChangeNotifier {
     myCourse = _listMycourse.singleWhere((element) => element.uid == idCourse);
   }
 
-  Future<void> getData(String uid) async {
+  Future<List<CourseModel>> getData(String uid) async {
     var res = await MycourseService(uid).getCollection();
     _listMycourse = res;
     notifyListeners();
+    return _listMycourse;
   }
 
   Future<List<CourseModel>> getState(String uid) async {
@@ -37,26 +38,32 @@ class MyCourseRepository with ChangeNotifier {
     return listMycourse;
   }
 
-  Future<void> getOneData(String uid, String idCourse) async {
+  Future<bool> getOneData(String uid, String idCourse) async {
     var res = await MycourseService(uid).getDocument(idCourse);
     myCourse = res;
+    _listMycourse[_listMycourse
+        .indexOf(_listMycourse.singleWhere((e) => e.uid == idCourse))] = res;
     notifyListeners();
+    return true;
   }
 
   Future<void> updateProgressDone(
-      String idUser, String idCourse, String idmateri) async {
+      String idUser, String idCourse, String idmateri, int totalMateri) async {
     var cekDone = _myCourse.progress
         ?.singleWhere((element) => element == idmateri, orElse: () => null);
     List<String> listData = _myCourse.progress ?? [];
-    if (cekDone != null) {
-      //cek materi udah done atau belum, mun udah di remove lok dari list, baru di add agik,
-      //jadi materi terakhir yg di klik, masuk ke last array, dan biar dak terjadi duplikat array.
-      listData.remove(cekDone);
+    if (_myCourse.totalmateri == null || _myCourse.totalmateri != totalMateri) {
+      await MycourseService(idUser).updateTotalMateri(idCourse, totalMateri);
     }
-    listData.add(idmateri);
-    await MycourseService(idUser)
-        .updateProgressDone(idCourse, listData)
-        .then((_) async => await getOneData(idUser, idCourse));
+    if (cekDone == null) {
+      //ngecek dah done e belom materinye, mun belum, update ke db, dah itu perbarui data nye
+      // listData.remove(cekDone);
+      listData.add(idmateri);
+      await MycourseService(idUser)
+          .updateProgressDone(idCourse, listData)
+          //setelah update data, di get tuk perbarui data di mycourse;
+          .then((_) async => await getOneData(idUser, idCourse));
+    }
   }
 
   bool isDone(String idmateri) {

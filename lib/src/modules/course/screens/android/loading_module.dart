@@ -17,28 +17,32 @@ class LoadingModule extends StatelessWidget {
         Provider.of<MyCourseRepository>(context, listen: false);
     final user = Provider.of<LoginService>(context);
 
-//tuk persinggahan.. jadi bende nin, ngeget semue materi lok, nanti disimpan di DBsqlite
+//tuk persinggahan.. jadi bende nin, nge-get semue materi lok, nanti disimpan di DBsqlite
 //jadi mun data nye banyak kan get nye agak lama, nampilkan loading am,..
 //tuk selanjutnye, dak perlu get ke server gim, cukup get ke db sqlite(ini masih rencane, belom bljr sqlite ak wkwkw)
-    return FutureBuilder<List<MateriModel>>(
-        future: materiprov.getState(idCourse),
-        builder: (context, snapshot) {
-          if (snapshot.data != null) {
-            mycourseprov.getOneData(user.user.uid, idCourse);
-            return ModulDrawerItem(listMateri: snapshot.data);
-          }
+    return FutureBuilder<bool>(
+        future: mycourseprov.getOneData(user.user.uid, idCourse),
+        builder: (context, snapshotsatu) {
+          return FutureBuilder<List<MateriModel>>(
+              future: materiprov.getState(idCourse),
+              builder: (context, snapshot) {
+                if (snapshot.data != null &&
+                    snapshotsatu.connectionState == ConnectionState.done) {
+                  return ModulDrawerItem(listMateri: snapshot.data);
+                }
 
-          return Scaffold(
-            body: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  CircularProgressIndicator(),
-                  Text('Memuat data Materi...')
-                ],
-              ),
-            ),
-          );
+                return Scaffold(
+                  body: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        CircularProgressIndicator(),
+                        Text('Memuat data Materi...')
+                      ],
+                    ),
+                  ),
+                );
+              });
         });
   }
 }

@@ -37,4 +37,9 @@ class MycourseService with ChangeNotifier {
   Future<void> updateProgressDone(String idmycourse, List<String> data) async {
     await _api.updateDocument(idmycourse, {"progress": data});
   }
+
+  //nyimpan total materi tuk di progress
+  Future<void> updateTotalMateri(String idcourse, int totalMateri) async {
+    await _api.updateDocument(idcourse, {"totalmateri": totalMateri});
+  }
 }

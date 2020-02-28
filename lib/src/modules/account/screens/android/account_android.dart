@@ -53,6 +53,14 @@ class AccountAndroid extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
+                            //TODO: ngetes tombol logout
+                            RaisedButton(
+                              onPressed: () {
+                                user.signOut();
+                              },
+                              child: Text('Keluarrrrrr....'),
+                            ),
+                            //end tombol test-----------------------------
                             CustomFadeAnimation(
                               1.0,
                               Text(
@@ -116,7 +124,9 @@ class AccountAndroid extends StatelessWidget {
               //nanti kalo class udah work baru colok widget ini
               (myCourse.listMycourse == null)
                   ? NoDataContainer()
-                  : ListMyCourseWidget(listMycourse: myCourse.listMycourse),
+                  : ListMyCourseWidget(
+                      listMycourse: myCourse.listMycourse,
+                    ),
             ],
           ),
         ),
