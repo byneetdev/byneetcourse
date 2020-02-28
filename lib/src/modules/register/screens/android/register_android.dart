@@ -12,6 +12,7 @@ class RegisterAndroid extends StatefulWidget {
 }
 
 class _RegisterAndroidState extends State<RegisterAndroid> {
+  final GlobalKey scafkey = GlobalKey<ScaffoldState>();
   //cuma ngetes ui validator.
   //pindahkan jak sesuai state management
   final emailCtrl = TextEditingController();
@@ -53,6 +54,7 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scafkey,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: CustomColor.background,
@@ -209,10 +211,29 @@ class _RegisterAndroidState extends State<RegisterAndroid> {
                     CustomButtonWidget(
                         onPressed: () async {
                           if (formKey.currentState.validate()) {
-                            Provider.of<LoginService>(context, listen: false)
+                            bool regist = await Provider.of<LoginService>(
+                                    context,
+                                    listen: false)
                                 .register(emailCtrl.text, passCtrl.text,
-                                    namaLengkapCtrl.text, keahlianCtrl.text)
-                                .then((value) => Navigator.pop(context));
+                                    namaLengkapCtrl.text, keahlianCtrl.text);
+
+                            if (regist) {
+                              Navigator.pop(context);
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) => AlertDialog(
+                                        content: Text('Email sudah dipakai !!'),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text('Close'))
+                                        ],
+                                      ));
+                            }
+
                             //nanti di buat loading untuk menu utama hehe
                           }
                         },

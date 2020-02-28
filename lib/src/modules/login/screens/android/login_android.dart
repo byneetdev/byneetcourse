@@ -152,12 +152,34 @@ class _LoginAndroidState extends State<LoginAndroid> {
                   CustomFadeAnimation(
                     2.0,
                     CustomButtonWidget(
-                      onPressed: () {
+                      onPressed: () async {
                         if (formKey.currentState.validate()) {
-                          user.signIn(emailCtrl.text, passCtrl.text);
+                          bool sigin =
+                              await user.signIn(emailCtrl.text, passCtrl.text);
+
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    content: Consumer<LoginService>(
+                                        builder: (context, loginserv, _) {
+                                      if (loginserv.status ==
+                                          Status.Authenticating) {
+                                        return CircularProgressIndicator();
+                                      } else {
+                                        if (sigin) {
+                                          return Text('Login Sukses');
+                                        } else {
+                                          return Text(
+                                              'Login Gagal! Tolong periksa kembali Email dan Password kamu!');
+                                        }
+                                      }
+                                    }),
+                                  ));
                         }
                       },
-                      title: "Log In",
+                      title: (user.status == Status.Authenticating)
+                          ? "Loading..."
+                          : "Log In",
                     ),
                   ),
                   SizedBox(height: 16),
