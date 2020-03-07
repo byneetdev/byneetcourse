@@ -1,6 +1,8 @@
 import 'package:byneetcourseapp/src/modules/course/models/course_model_purin.dart';
+import 'package:byneetcourseapp/src/modules/course/screens/android/courseDetail_android.dart';
 import 'package:byneetcourseapp/src/modules/course/services/course_service.dart';
 import 'package:byneetcourseapp/src/tools/constColor.dart';
+import 'package:byneetcourseapp/src/widgets/bouncyPageRoute_widget.dart';
 import 'package:byneetcourseapp/src/widgets/customCardCourse_widget.dart';
 import 'package:byneetcourseapp/src/widgets/customFadeAnimation_widget.dart';
 import 'package:flutter/material.dart';
@@ -77,13 +79,23 @@ class _CourseGridAllState extends State<CourseGridAll>
                     final kelas = snapshot.data[index];
                     return CustomFadeAnimation(
                       1.2,
-                      CustomCardCourseWidget(
-                        heroTag: kelas.uid,
-                        urlimage: kelas.urlimage,
-                        title: kelas.title,
-                        creator: kelas.creatorName,
-                        rating: kelas.rating,
-                        status: kelas.classStatus,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            BouncyPageRoute(
+                              destination: CourseDetailAndroid(kelas: kelas),
+                            ),
+                          );
+                        },
+                        child: CustomCardCourseWidget(
+                          heroTag: kelas.uid,
+                          urlimage: kelas.urlimage,
+                          title: kelas.title,
+                          creator: kelas.creatorName,
+                          rating: kelas.rating,
+                          status: kelas.classStatus,
+                        ),
                       ),
                     );
                   },
