@@ -20,7 +20,6 @@ class _ModulDrawerItemState extends State<ModulDrawerItem>
   CourseModel mycourse;
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     var mycourse = Provider.of<MyCourseRepository>(context).myCourse;
     if (mycourse != this.mycourse) {
