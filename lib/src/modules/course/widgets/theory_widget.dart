@@ -47,8 +47,15 @@ class EntryItem extends StatelessWidget {
           children: root.items.map((e) {
             return ListTile(
               onTap: () {
+                //! not work
+                //? mau ke view belajar pencet beli sekarang / lanjut belajar
+                //? file nya ada di course detail widget claim card
+                //?
                 // Navigator.push(
-                //     context, BouncyPageRoute(destination: ModulDrawerItem()));
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => ExamView(),
+                //     ));
               },
               leading: Icon(Icons.lock),
               title: Text(
