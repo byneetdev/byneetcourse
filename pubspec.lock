@@ -380,6 +380,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  progress_dialog:
+    dependency: "direct main"
+    description:
+      name: progress_dialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.1"
   provider:
     dependency: "direct main"
     description:
@@ -454,7 +461,11 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.2.15"
+=======
+    version: "0.2.11"
+>>>>>>> 3d843b7e2c90ad3781e8e9ab5bc38fd81e866893
   transformer_page_view:
     dependency: transitive
     description:

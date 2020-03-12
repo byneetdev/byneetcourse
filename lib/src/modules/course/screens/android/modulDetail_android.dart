@@ -1,6 +1,10 @@
+import 'package:byneetcourseapp/src/modules/account/mycourse_repository.dart';
 import 'package:byneetcourseapp/src/modules/course/models/materi_model.dart';
+import 'package:byneetcourseapp/src/modules/course/services/materi_repository.dart';
+import 'package:byneetcourseapp/src/modules/login/services/login_service.dart';
 import 'package:byneetcourseapp/src/widgets/customDrawer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends DrawerContent {
   final MateriModel materi;
@@ -12,7 +16,11 @@ class MainPage extends DrawerContent {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    // final materiprov = Provider.of<MateriRepository>(context);
+    final materiprov = Provider.of<MateriRepository>(context);
+    final mycourse = Provider.of<MyCourseRepository>(context);
+    final user = Provider.of<LoginService>(context);
+    mycourse.updateProgressDone(user.user.uid, mycourse.myCourse.uid,
+        widget.materi.id, materiprov.listMateri.length);
     return SafeArea(
       child: Center(
         child: Column(

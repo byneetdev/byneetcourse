@@ -45,14 +45,34 @@ class CardCourseProgressWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    "93% Terselesaikan",
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: CustomColor.textColorSecondary,
-                      fontSize: 15,
+                  // Text(
+                  //   "93% Terselesaikan",
+                  //   overflow: TextOverflow.ellipsis,
+                  //   style: TextStyle(
+                  //     color: CustomColor.textColorSecondary,
+                  //     fontSize: 15,
+                  //   ),
+                  // ),
+                  Container(
+                    child: Row(
+                      // mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        // LinearProgressIndicator(
+                        //   value: (((mycourse?.progress?.length ?? 0.0) /
+                        //               (mycourse?.totalmateri ?? 0.0)) ??
+                        //           0.0)
+                        //       .floorToDouble(),
+                        // ),
+                        Text(((((mycourse?.progress?.length ?? 0.0) /
+                                            (mycourse?.totalmateri ?? 1.0)) ??
+                                        0.0) *
+                                    100)
+                                .floor()
+                                .toString() +
+                            "% [${(mycourse?.progress?.length ?? 0)}/${(mycourse?.totalmateri ?? 0)} materi]")
+                      ],
                     ),
-                  ),
+                  )
                 ],
               ),
             )
