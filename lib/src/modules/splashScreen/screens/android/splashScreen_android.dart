@@ -52,7 +52,8 @@ class _SplashScreenState extends State<SplashScreen> {
           .getData(user.user.uid);
       return BottomNavBar();
     }
-    if (user.status == Status.Unauthenticated) return LoginAndroid();
+    if (user.status == Status.Unauthenticated ||
+        user.status == Status.Authenticating) return LoginAndroid();
 
     return Scaffold(
       backgroundColor: Colors.white,
